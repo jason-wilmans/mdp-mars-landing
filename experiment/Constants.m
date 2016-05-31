@@ -1,1 +1,0 @@
-marsGravity = 3.711; % m/s*s

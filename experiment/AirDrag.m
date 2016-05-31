@@ -1,5 +1,7 @@
 function [ airDrag ] = AirDrag( speed, rocketDiameter )
-    airDrag = 0.5 * ResistenceCoefficient() * Area(rocketDiameter) * AirDensity() * speed * speed;
+    area = Area(rocketDiameter);
+    
+    airDrag = 0.5 * ResistenceCoefficient() * area * AirDensity() * speed * speed;
 end
 
 function [ area ] = Area( rocketDiameter )
