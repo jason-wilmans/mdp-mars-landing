@@ -11,5 +11,5 @@ function [ cw ] = ResistenceCoefficient()
 end
 
 function [ density ] = AirDensity()
-    density = 1.33;
+    density = 0.00903; % kg / m^3
 end
