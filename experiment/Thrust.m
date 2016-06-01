@@ -1,5 +1,4 @@
-function [ thrust ] = Thrust( throttle )
-    %rocketPower = 33851; % max thrust in kn
-    %thrust = throttle * rocketPower;
-    thrust = 0 * throttle;
+function [ thrust ] = Thrust( throttle, rocketPower )
+    %rocketPower max thrust in kN
+    thrust = throttle * rocketPower * 1000;
 end

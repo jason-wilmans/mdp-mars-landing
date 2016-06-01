@@ -19,7 +19,9 @@ typedef struct {
   int32_T c2_sfEvent;
   boolean_T c2_doneDoubleBufferReInit;
   uint8_T c2_is_active_c2_landingSimulation;
+  real_T *c2_rocketPower;
   real_T *c2_thrustSetting;
+  real_T *c2_bruttoWeight;
   real_T *c2_acceleration;
   real_T *c2_tankLevel;
   real_T *c2_tankVolume;

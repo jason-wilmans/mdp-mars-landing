@@ -22,15 +22,16 @@ static const mxArray* sf_opaque_get_hover_data_for_msg(void *chartInstance,
 
 /* Variable Definitions */
 static real_T _sfTime_;
-static const char * c2_debug_family_names[11] = { "thrust", "gravity", "airDrag",
-  "nargin", "nargout", "thrustSetting", "tankLevel", "tankVolume", "speed",
-  "rocketDiameter", "acceleration" };
+static const char * c2_debug_family_names[13] = { "thrust", "gravity", "airDrag",
+  "nargin", "nargout", "rocketPower", "thrustSetting", "bruttoWeight",
+  "tankLevel", "tankVolume", "speed", "rocketDiameter", "acceleration" };
 
-static const char * c2_b_debug_family_names[4] = { "nargin", "nargout",
-  "throttle", "thrust" };
+static const char * c2_b_debug_family_names[5] = { "nargin", "nargout",
+  "throttle", "rocketPower", "thrust" };
 
-static const char * c2_c_debug_family_names[6] = { "marsGravity", "nargin",
-  "nargout", "tankLevel", "tankVolume", "acceleration" };
+static const char * c2_c_debug_family_names[8] = { "earthGravity",
+  "tonnesToNewton", "nargin", "nargout", "bruttoWeight", "tankLevel",
+  "tankVolume", "acceleration" };
 
 static const char * c2_d_debug_family_names[4] = { "nargin", "nargout",
   "rocketDiameter", "area" };
@@ -188,40 +189,49 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   real_T c2_c_hoistedGlobal;
   real_T c2_d_hoistedGlobal;
   real_T c2_e_hoistedGlobal;
+  real_T c2_f_hoistedGlobal;
+  real_T c2_g_hoistedGlobal;
+  real_T c2_b_rocketPower;
   real_T c2_b_thrustSetting;
+  real_T c2_b_bruttoWeight;
   real_T c2_b_tankLevel;
   real_T c2_b_tankVolume;
   real_T c2_b_speed;
   real_T c2_b_rocketDiameter;
-  uint32_T c2_debug_family_var_map[11];
+  uint32_T c2_debug_family_var_map[13];
   real_T c2_thrust;
   real_T c2_gravity;
   real_T c2_airDrag;
-  real_T c2_nargin = 5.0;
+  real_T c2_nargin = 7.0;
   real_T c2_nargout = 1.0;
   real_T c2_b_acceleration;
   real_T c2_throttle;
-  uint32_T c2_b_debug_family_var_map[4];
-  real_T c2_b_nargin = 1.0;
+  real_T c2_c_rocketPower;
+  uint32_T c2_b_debug_family_var_map[5];
+  real_T c2_b_nargin = 2.0;
   real_T c2_b_nargout = 1.0;
+  real_T c2_c_bruttoWeight;
   real_T c2_c_tankLevel;
   real_T c2_c_tankVolume;
-  uint32_T c2_c_debug_family_var_map[6];
-  real_T c2_marsGravity;
-  real_T c2_c_nargin = 2.0;
+  uint32_T c2_c_debug_family_var_map[8];
+  real_T c2_earthGravity;
+  real_T c2_tonnesToNewton;
+  real_T c2_c_nargin = 3.0;
   real_T c2_c_nargout = 1.0;
   real_T c2_c_speed;
   real_T c2_c_rocketDiameter;
+  uint32_T c2_d_debug_family_var_map[6];
   real_T c2_area;
   real_T c2_d_nargin = 2.0;
   real_T c2_d_nargout = 1.0;
   real_T c2_d_rocketDiameter;
+  uint32_T c2_e_debug_family_var_map[4];
   real_T c2_e_nargin = 1.0;
   real_T c2_e_nargout = 1.0;
   real_T c2_A;
   real_T c2_x;
   real_T c2_b_x;
-  uint32_T c2_d_debug_family_var_map[3];
+  uint32_T c2_f_debug_family_var_map[3];
   real_T c2_cw;
   real_T c2_f_nargin = 0.0;
   real_T c2_f_nargout = 1.0;
@@ -231,29 +241,37 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   _SFD_SYMBOL_SCOPE_PUSH(0U, 0U);
   _sfTime_ = sf_get_time(chartInstance->S);
   _SFD_CC_CALL(CHART_ENTER_SFUNCTION_TAG, 0U, chartInstance->c2_sfEvent);
-  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_rocketDiameter, 4U, 1U, 0U,
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_rocketDiameter, 6U, 1U, 0U,
                         chartInstance->c2_sfEvent, false);
-  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_speed, 3U, 1U, 0U,
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_speed, 5U, 1U, 0U,
                         chartInstance->c2_sfEvent, false);
-  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_tankVolume, 2U, 1U, 0U,
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_tankVolume, 4U, 1U, 0U,
                         chartInstance->c2_sfEvent, false);
-  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_tankLevel, 1U, 1U, 0U,
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_tankLevel, 3U, 1U, 0U,
                         chartInstance->c2_sfEvent, false);
-  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_thrustSetting, 0U, 1U, 0U,
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_bruttoWeight, 2U, 1U, 0U,
+                        chartInstance->c2_sfEvent, false);
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_thrustSetting, 1U, 1U, 0U,
+                        chartInstance->c2_sfEvent, false);
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_rocketPower, 0U, 1U, 0U,
                         chartInstance->c2_sfEvent, false);
   chartInstance->c2_sfEvent = CALL_EVENT;
   _SFD_CC_CALL(CHART_ENTER_DURING_FUNCTION_TAG, 0U, chartInstance->c2_sfEvent);
-  c2_hoistedGlobal = *chartInstance->c2_thrustSetting;
-  c2_b_hoistedGlobal = *chartInstance->c2_tankLevel;
-  c2_c_hoistedGlobal = *chartInstance->c2_tankVolume;
-  c2_d_hoistedGlobal = *chartInstance->c2_speed;
-  c2_e_hoistedGlobal = *chartInstance->c2_rocketDiameter;
-  c2_b_thrustSetting = c2_hoistedGlobal;
-  c2_b_tankLevel = c2_b_hoistedGlobal;
-  c2_b_tankVolume = c2_c_hoistedGlobal;
-  c2_b_speed = c2_d_hoistedGlobal;
-  c2_b_rocketDiameter = c2_e_hoistedGlobal;
-  _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 11U, 11U, c2_debug_family_names,
+  c2_hoistedGlobal = *chartInstance->c2_rocketPower;
+  c2_b_hoistedGlobal = *chartInstance->c2_thrustSetting;
+  c2_c_hoistedGlobal = *chartInstance->c2_bruttoWeight;
+  c2_d_hoistedGlobal = *chartInstance->c2_tankLevel;
+  c2_e_hoistedGlobal = *chartInstance->c2_tankVolume;
+  c2_f_hoistedGlobal = *chartInstance->c2_speed;
+  c2_g_hoistedGlobal = *chartInstance->c2_rocketDiameter;
+  c2_b_rocketPower = c2_hoistedGlobal;
+  c2_b_thrustSetting = c2_b_hoistedGlobal;
+  c2_b_bruttoWeight = c2_c_hoistedGlobal;
+  c2_b_tankLevel = c2_d_hoistedGlobal;
+  c2_b_tankVolume = c2_e_hoistedGlobal;
+  c2_b_speed = c2_f_hoistedGlobal;
+  c2_b_rocketDiameter = c2_g_hoistedGlobal;
+  _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 13U, 13U, c2_debug_family_names,
     c2_debug_family_var_map);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_thrust, 0U, c2_sf_marshallOut,
     c2_sf_marshallIn);
@@ -265,17 +283,20 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
     c2_sf_marshallIn);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_nargout, 4U, c2_sf_marshallOut,
     c2_sf_marshallIn);
-  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_thrustSetting, 5U, c2_sf_marshallOut);
-  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_tankLevel, 6U, c2_sf_marshallOut);
-  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_tankVolume, 7U, c2_sf_marshallOut);
-  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_speed, 8U, c2_sf_marshallOut);
-  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_rocketDiameter, 9U, c2_sf_marshallOut);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_b_acceleration, 10U,
+  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_rocketPower, 5U, c2_sf_marshallOut);
+  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_thrustSetting, 6U, c2_sf_marshallOut);
+  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_bruttoWeight, 7U, c2_sf_marshallOut);
+  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_tankLevel, 8U, c2_sf_marshallOut);
+  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_tankVolume, 9U, c2_sf_marshallOut);
+  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_speed, 10U, c2_sf_marshallOut);
+  _SFD_SYMBOL_SCOPE_ADD_EML(&c2_b_rocketDiameter, 11U, c2_sf_marshallOut);
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_b_acceleration, 12U,
     c2_sf_marshallOut, c2_sf_marshallIn);
   CV_EML_FCN(0, 0);
   _SFD_EML_CALL(0U, chartInstance->c2_sfEvent, 2);
   c2_throttle = c2_b_thrustSetting;
-  _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 4U, 4U, c2_b_debug_family_names,
+  c2_c_rocketPower = c2_b_rocketPower;
+  _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 5U, 5U, c2_b_debug_family_names,
     c2_b_debug_family_var_map);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_b_nargin, 0U, c2_sf_marshallOut,
     c2_sf_marshallIn);
@@ -283,42 +304,52 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
     c2_sf_marshallIn);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_throttle, 2U, c2_sf_marshallOut,
     c2_sf_marshallIn);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_thrust, 3U, c2_sf_marshallOut,
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_rocketPower, 3U, c2_sf_marshallOut,
+    c2_sf_marshallIn);
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_thrust, 4U, c2_sf_marshallOut,
     c2_sf_marshallIn);
   CV_SCRIPT_FCN(0, 0);
-  _SFD_SCRIPT_CALL(0U, chartInstance->c2_sfEvent, 4);
-  c2_thrust = 0.0 * c2_throttle;
-  _SFD_SCRIPT_CALL(0U, chartInstance->c2_sfEvent, -4);
+  _SFD_SCRIPT_CALL(0U, chartInstance->c2_sfEvent, 3);
+  c2_thrust = c2_throttle * c2_c_rocketPower * 1000.0;
+  _SFD_SCRIPT_CALL(0U, chartInstance->c2_sfEvent, -3);
   _SFD_SYMBOL_SCOPE_POP();
   _SFD_EML_CALL(0U, chartInstance->c2_sfEvent, 3);
+  c2_c_bruttoWeight = c2_b_bruttoWeight;
   c2_c_tankLevel = c2_b_tankLevel;
   c2_c_tankVolume = c2_b_tankVolume;
-  _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 6U, 6U, c2_c_debug_family_names,
+  _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 8U, 8U, c2_c_debug_family_names,
     c2_c_debug_family_var_map);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_marsGravity, 0U, c2_sf_marshallOut,
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_earthGravity, 0U, c2_sf_marshallOut,
     c2_sf_marshallIn);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_nargin, 1U, c2_sf_marshallOut,
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_tonnesToNewton, 1U, c2_sf_marshallOut,
     c2_sf_marshallIn);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_nargout, 2U, c2_sf_marshallOut,
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_nargin, 2U, c2_sf_marshallOut,
     c2_sf_marshallIn);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_tankLevel, 3U, c2_sf_marshallOut,
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_nargout, 3U, c2_sf_marshallOut,
     c2_sf_marshallIn);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_tankVolume, 4U, c2_sf_marshallOut,
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_bruttoWeight, 4U, c2_sf_marshallOut,
     c2_sf_marshallIn);
-  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_gravity, 5U, c2_sf_marshallOut,
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_tankLevel, 5U, c2_sf_marshallOut,
+    c2_sf_marshallIn);
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_c_tankVolume, 6U, c2_sf_marshallOut,
+    c2_sf_marshallIn);
+  _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_gravity, 7U, c2_sf_marshallOut,
     c2_sf_marshallIn);
   CV_SCRIPT_FCN(1, 0);
   _SFD_SCRIPT_CALL(1U, chartInstance->c2_sfEvent, 5);
-  c2_marsGravity = 3.711;
+  c2_earthGravity = 9.81;
   _SFD_SCRIPT_CALL(1U, chartInstance->c2_sfEvent, 7);
-  c2_gravity = c2_marsGravity * c2_c_tankLevel * c2_c_tankVolume;
-  _SFD_SCRIPT_CALL(1U, chartInstance->c2_sfEvent, -7);
+  c2_tonnesToNewton = 9800.0;
+  _SFD_SCRIPT_CALL(1U, chartInstance->c2_sfEvent, 9);
+  c2_gravity = c2_earthGravity * c2_tonnesToNewton * (c2_c_bruttoWeight +
+    c2_c_tankLevel * c2_c_tankVolume);
+  _SFD_SCRIPT_CALL(1U, chartInstance->c2_sfEvent, -9);
   _SFD_SYMBOL_SCOPE_POP();
   _SFD_EML_CALL(0U, chartInstance->c2_sfEvent, 4);
   c2_c_speed = c2_b_speed;
   c2_c_rocketDiameter = c2_b_rocketDiameter;
   _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 6U, 6U, c2_g_debug_family_names,
-    c2_c_debug_family_var_map);
+    c2_d_debug_family_var_map);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_area, 0U, c2_sf_marshallOut,
     c2_sf_marshallIn);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_d_nargin, 1U, c2_sf_marshallOut,
@@ -335,7 +366,7 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, 2);
   c2_d_rocketDiameter = c2_c_rocketDiameter;
   _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 4U, 4U, c2_d_debug_family_names,
-    c2_b_debug_family_var_map);
+    c2_e_debug_family_var_map);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_e_nargin, 0U, c2_sf_marshallOut,
     c2_sf_marshallIn);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_e_nargout, 1U, c2_sf_marshallOut,
@@ -354,7 +385,7 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   _SFD_SYMBOL_SCOPE_POP();
   _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, 4);
   _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 3U, 3U, c2_e_debug_family_names,
-    c2_d_debug_family_var_map);
+    c2_f_debug_family_var_map);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_cw, 0U, c2_sf_marshallOut,
     c2_sf_marshallIn);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_f_nargin, 1U, c2_sf_marshallOut,
@@ -367,7 +398,7 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, -12);
   _SFD_SYMBOL_SCOPE_POP();
   _SFD_SYMBOL_SCOPE_PUSH_EML(0U, 3U, 3U, c2_f_debug_family_names,
-    c2_d_debug_family_var_map);
+    c2_f_debug_family_var_map);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_density, 0U, c2_sf_marshallOut,
     c2_sf_marshallIn);
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_g_nargin, 1U, c2_sf_marshallOut,
@@ -375,11 +406,11 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   _SFD_SYMBOL_SCOPE_ADD_EML_IMPORTABLE(&c2_g_nargout, 2U, c2_sf_marshallOut,
     c2_sf_marshallIn);
   CV_SCRIPT_FCN(2, 3);
-  _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, 16);
-  c2_density = 0.00903;
-  _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, -16);
+  _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, 17);
+  c2_density = 11.481;
+  _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, -17);
   _SFD_SYMBOL_SCOPE_POP();
-  c2_airDrag = 0.665 * c2_area * 0.00903 * c2_c_speed * c2_c_speed;
+  c2_airDrag = 0.665 * c2_area * 11.481 * c2_c_speed * c2_c_speed;
   _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, -4);
   _SFD_SYMBOL_SCOPE_POP();
   _SFD_EML_CALL(0U, chartInstance->c2_sfEvent, 6);
@@ -391,7 +422,7 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   _SFD_SYMBOL_SCOPE_POP();
   _SFD_CHECK_FOR_STATE_INCONSISTENCY(_landingSimulationMachineNumber_,
     chartInstance->chartNumber, chartInstance->instanceNumber);
-  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_acceleration, 5U, 1U, 0U,
+  _SFD_DATA_RANGE_CHECK(*chartInstance->c2_acceleration, 7U, 1U, 0U,
                         chartInstance->c2_sfEvent, false);
 }
 
@@ -488,12 +519,12 @@ const mxArray *sf_c2_landingSimulation_get_eml_resolved_functions_info(void)
 {
   const mxArray *c2_nameCaptureInfo = NULL;
   const char * c2_data[4] = {
-    "789ced52cd4ac430109eeabaea41f1313c198f227a585cff406f5d3c8887ba1dddac4d529274d9bd8967c157f21dc447f03d4cb6690da5b850f10f766018be7e"
-    "f99299e907c1e93998583799ae00b44d350516208f258703938baee6df5bb0e6f083c9bee01ac73a2779c4108a8805a33ce23a9ca40812954846184f991b9a60",
-    "48199e090f9c5003d8914795c05272a0ca9b21f1411e768e6df898a35599a388628e0d4fb7f3892e709cafb3381cc84ce9e6fa5864d709bafdcfd0ef55f4165f"
-    "1e5e1dec929e42a9c830528293aee8670cb956e442c83bd2e394b03825384e51524b90bce72d563777bbe6ddc07b77b5dce3fd1b7d79ed34d7d7effd37f49b9e",
-    "3ea8d183579b9cff2e3f2e5774161fcb6844f5e447fcb85fd15bdcc48faee7a9219bffcfe7279cfbf1cff9b143655746b7ffca8faee7affaf17138f7e3ccf3ef"
-    "f7b58ee5", "" };
+    "789ced52cd4a0331109ed55af5a0f4313c198f227a28d63fd05b8b07f1b076471bdd244b922dedd5a71241e83b145fc42730e966dbb02c16b6f8071d18866fbf"
+    "7cc9ccec07c1c51598d836996c00d44d350556208b35870393abae66df6bb0e5f0b3c9aee01a073a2379c810f28804a33ce4ba3d4c10242a11f7319a30f734c6",
+    "366578293c704e0d60a71e350596923d35bd19621f6461e7d883d91cb5c21c79e473343cddfe17bac071becee2764fa64a57d74722bd8bd1ed7f8efeb0a0b7f8"
+    "e6e4f6f88074144a451e43253869896eca906b45ae857c221d4e098b1282830425b504c97ade656573d74bde0dbc7737677b1cbd8cdf9b0be84bf7fe1bfa1d4f",
+    "1f94e8c1ab55ce7f971fd70b3a8bcf64d8a77af8237e3c2ae82daee247d7f3c490d5ffe7e8e375e9c73fe7c726952d193efc2b3fba9e17f42334de967e9c7bfe"
+    "1379bb8e5e", "" };
 
   c2_nameCaptureInfo = NULL;
   emlrtNameCaptureMxArrayR2016a(c2_data, 2176U, &c2_nameCaptureInfo);
@@ -585,18 +616,22 @@ static void init_dsm_address_info(SFc2_landingSimulationInstanceStruct
 static void init_simulink_io_address(SFc2_landingSimulationInstanceStruct
   *chartInstance)
 {
-  chartInstance->c2_thrustSetting = (real_T *)ssGetInputPortSignal_wrapper
+  chartInstance->c2_rocketPower = (real_T *)ssGetInputPortSignal_wrapper
     (chartInstance->S, 0);
+  chartInstance->c2_thrustSetting = (real_T *)ssGetInputPortSignal_wrapper
+    (chartInstance->S, 1);
+  chartInstance->c2_bruttoWeight = (real_T *)ssGetInputPortSignal_wrapper
+    (chartInstance->S, 2);
   chartInstance->c2_acceleration = (real_T *)ssGetOutputPortSignal_wrapper
     (chartInstance->S, 1);
   chartInstance->c2_tankLevel = (real_T *)ssGetInputPortSignal_wrapper
-    (chartInstance->S, 1);
-  chartInstance->c2_tankVolume = (real_T *)ssGetInputPortSignal_wrapper
-    (chartInstance->S, 2);
-  chartInstance->c2_speed = (real_T *)ssGetInputPortSignal_wrapper
     (chartInstance->S, 3);
-  chartInstance->c2_rocketDiameter = (real_T *)ssGetInputPortSignal_wrapper
+  chartInstance->c2_tankVolume = (real_T *)ssGetInputPortSignal_wrapper
     (chartInstance->S, 4);
+  chartInstance->c2_speed = (real_T *)ssGetInputPortSignal_wrapper
+    (chartInstance->S, 5);
+  chartInstance->c2_rocketDiameter = (real_T *)ssGetInputPortSignal_wrapper
+    (chartInstance->S, 6);
 }
 
 /* SFunction Glue Code */
@@ -622,10 +657,10 @@ extern void utFree(void*);
 
 void sf_c2_landingSimulation_get_check_sum(mxArray *plhs[])
 {
-  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(743057723U);
-  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(2637322613U);
-  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(668721816U);
-  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(2836110826U);
+  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(839079161U);
+  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(1901346449U);
+  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(2359015470U);
+  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(168010276U);
 }
 
 mxArray* sf_c2_landingSimulation_get_post_codegen_info(void);
@@ -639,14 +674,14 @@ mxArray *sf_c2_landingSimulation_get_autoinheritance_info(void)
     autoinheritanceFields);
 
   {
-    mxArray *mxChecksum = mxCreateString("oJpiBH1kBLx2KZa48OiXyC");
+    mxArray *mxChecksum = mxCreateString("JwiEmzkyFDl2if5QGSVpBD");
     mxSetField(mxAutoinheritanceInfo,0,"checksum",mxChecksum);
   }
 
   {
     const char *dataFields[] = { "size", "type", "complexity" };
 
-    mxArray *mxData = mxCreateStructMatrix(1,5,3,dataFields);
+    mxArray *mxData = mxCreateStructMatrix(1,7,3,dataFields);
 
     {
       mxArray *mxSize = mxCreateDoubleMatrix(1,0,mxREAL);
@@ -742,6 +777,44 @@ mxArray *sf_c2_landingSimulation_get_autoinheritance_info(void)
     }
 
     mxSetField(mxData,4,"complexity",mxCreateDoubleScalar(0));
+
+    {
+      mxArray *mxSize = mxCreateDoubleMatrix(1,0,mxREAL);
+      double *pr = mxGetPr(mxSize);
+      mxSetField(mxData,5,"size",mxSize);
+    }
+
+    {
+      const char *typeFields[] = { "base", "fixpt", "isFixedPointType" };
+
+      mxArray *mxType = mxCreateStructMatrix(1,1,sizeof(typeFields)/sizeof
+        (typeFields[0]),typeFields);
+      mxSetField(mxType,0,"base",mxCreateDoubleScalar(10));
+      mxSetField(mxType,0,"fixpt",mxCreateDoubleMatrix(0,0,mxREAL));
+      mxSetField(mxType,0,"isFixedPointType",mxCreateDoubleScalar(0));
+      mxSetField(mxData,5,"type",mxType);
+    }
+
+    mxSetField(mxData,5,"complexity",mxCreateDoubleScalar(0));
+
+    {
+      mxArray *mxSize = mxCreateDoubleMatrix(1,0,mxREAL);
+      double *pr = mxGetPr(mxSize);
+      mxSetField(mxData,6,"size",mxSize);
+    }
+
+    {
+      const char *typeFields[] = { "base", "fixpt", "isFixedPointType" };
+
+      mxArray *mxType = mxCreateStructMatrix(1,1,sizeof(typeFields)/sizeof
+        (typeFields[0]),typeFields);
+      mxSetField(mxType,0,"base",mxCreateDoubleScalar(10));
+      mxSetField(mxType,0,"fixpt",mxCreateDoubleMatrix(0,0,mxREAL));
+      mxSetField(mxType,0,"isFixedPointType",mxCreateDoubleScalar(0));
+      mxSetField(mxData,6,"type",mxType);
+    }
+
+    mxSetField(mxData,6,"complexity",mxCreateDoubleScalar(0));
     mxSetField(mxAutoinheritanceInfo,0,"inputs",mxData);
   }
 
@@ -800,9 +873,9 @@ mxArray *sf_c2_landingSimulation_jit_fallback_info(void)
     "hiddenFallbackType", "hiddenFallbackReason", "incompatibleSymbol" };
 
   mxArray *mxInfo = mxCreateStructMatrix(1, 1, 5, infoFields);
-  mxArray *fallbackType = mxCreateString("early");
+  mxArray *fallbackType = mxCreateString("pre");
   mxArray *fallbackReason = mxCreateString("hasBreakpoints");
-  mxArray *hiddenFallbackType = mxCreateString("");
+  mxArray *hiddenFallbackType = mxCreateString("none");
   mxArray *hiddenFallbackReason = mxCreateString("");
   mxArray *incompatibleSymbol = mxCreateString("");
   mxSetField(mxInfo, 0, infoFields[0], fallbackType);
@@ -877,7 +950,7 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
            1,
            1,
            0,
-           6,
+           8,
            0,
            0,
            0,
@@ -901,12 +974,14 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
             0,
             0,
             0);
-          _SFD_SET_DATA_PROPS(0,1,1,0,"thrustSetting");
-          _SFD_SET_DATA_PROPS(1,1,1,0,"tankLevel");
-          _SFD_SET_DATA_PROPS(2,1,1,0,"tankVolume");
-          _SFD_SET_DATA_PROPS(3,1,1,0,"speed");
-          _SFD_SET_DATA_PROPS(4,1,1,0,"rocketDiameter");
-          _SFD_SET_DATA_PROPS(5,2,0,1,"acceleration");
+          _SFD_SET_DATA_PROPS(0,1,1,0,"rocketPower");
+          _SFD_SET_DATA_PROPS(1,1,1,0,"thrustSetting");
+          _SFD_SET_DATA_PROPS(2,1,1,0,"bruttoWeight");
+          _SFD_SET_DATA_PROPS(3,1,1,0,"tankLevel");
+          _SFD_SET_DATA_PROPS(4,1,1,0,"tankVolume");
+          _SFD_SET_DATA_PROPS(5,1,1,0,"speed");
+          _SFD_SET_DATA_PROPS(6,1,1,0,"rocketDiameter");
+          _SFD_SET_DATA_PROPS(7,2,0,1,"acceleration");
           _SFD_STATE_INFO(0,0,2);
           _SFD_CH_SUBSTATE_COUNT(0);
           _SFD_CH_SUBSTATE_DECOMP(0);
@@ -922,16 +997,16 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
 
         /* Initialization of MATLAB Function Model Coverage */
         _SFD_CV_INIT_EML(0,1,1,0,0,0,0,0,0,0,0,0);
-        _SFD_CV_INIT_EML_FCN(0,0,"eML_blk_kernel",0,-1,286);
+        _SFD_CV_INIT_EML_FCN(0,0,"eML_blk_kernel",0,-1,339);
         _SFD_CV_INIT_SCRIPT(0,1,0,0,0,0,0,0,0,0,0);
-        _SFD_CV_INIT_SCRIPT_FCN(0,0,"Thrust",0,-1,154);
+        _SFD_CV_INIT_SCRIPT_FCN(0,0,"Thrust",0,-1,135);
         _SFD_CV_INIT_SCRIPT(1,1,0,0,0,0,0,0,0,0,0);
-        _SFD_CV_INIT_SCRIPT_FCN(1,0,"Gravity",0,-1,249);
+        _SFD_CV_INIT_SCRIPT_FCN(1,0,"Gravity",0,-1,388);
         _SFD_CV_INIT_SCRIPT(2,4,0,0,0,0,0,0,0,0,0);
         _SFD_CV_INIT_SCRIPT_FCN(2,0,"AirDrag",0,-1,180);
         _SFD_CV_INIT_SCRIPT_FCN(2,1,"Area",182,-1,288);
         _SFD_CV_INIT_SCRIPT_FCN(2,2,"ResistenceCoefficient",290,-1,350);
-        _SFD_CV_INIT_SCRIPT_FCN(2,3,"AirDensity",352,-1,425);
+        _SFD_CV_INIT_SCRIPT_FCN(2,3,"AirDensity",352,-1,460);
         _SFD_SET_DATA_COMPILED_PROPS(0,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
           (MexFcnForType)c2_sf_marshallOut,(MexInFcnForType)NULL);
         _SFD_SET_DATA_COMPILED_PROPS(1,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
@@ -943,6 +1018,10 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
         _SFD_SET_DATA_COMPILED_PROPS(4,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
           (MexFcnForType)c2_sf_marshallOut,(MexInFcnForType)NULL);
         _SFD_SET_DATA_COMPILED_PROPS(5,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
+          (MexFcnForType)c2_sf_marshallOut,(MexInFcnForType)NULL);
+        _SFD_SET_DATA_COMPILED_PROPS(6,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
+          (MexFcnForType)c2_sf_marshallOut,(MexInFcnForType)NULL);
+        _SFD_SET_DATA_COMPILED_PROPS(7,SF_DOUBLE,0,NULL,0,0,0,0.0,1.0,0,0,
           (MexFcnForType)c2_sf_marshallOut,(MexInFcnForType)c2_sf_marshallIn);
       }
     } else {
@@ -961,12 +1040,14 @@ static void chart_debug_initialize_data_addresses(SimStruct *S)
     if (ssIsFirstInitCond(S)) {
       /* do this only if simulation is starting and after we know the addresses of all data */
       {
-        _SFD_SET_DATA_VALUE_PTR(0U, chartInstance->c2_thrustSetting);
-        _SFD_SET_DATA_VALUE_PTR(5U, chartInstance->c2_acceleration);
-        _SFD_SET_DATA_VALUE_PTR(1U, chartInstance->c2_tankLevel);
-        _SFD_SET_DATA_VALUE_PTR(2U, chartInstance->c2_tankVolume);
-        _SFD_SET_DATA_VALUE_PTR(3U, chartInstance->c2_speed);
-        _SFD_SET_DATA_VALUE_PTR(4U, chartInstance->c2_rocketDiameter);
+        _SFD_SET_DATA_VALUE_PTR(0U, chartInstance->c2_rocketPower);
+        _SFD_SET_DATA_VALUE_PTR(1U, chartInstance->c2_thrustSetting);
+        _SFD_SET_DATA_VALUE_PTR(2U, chartInstance->c2_bruttoWeight);
+        _SFD_SET_DATA_VALUE_PTR(7U, chartInstance->c2_acceleration);
+        _SFD_SET_DATA_VALUE_PTR(3U, chartInstance->c2_tankLevel);
+        _SFD_SET_DATA_VALUE_PTR(4U, chartInstance->c2_tankVolume);
+        _SFD_SET_DATA_VALUE_PTR(5U, chartInstance->c2_speed);
+        _SFD_SET_DATA_VALUE_PTR(6U, chartInstance->c2_rocketDiameter);
       }
     }
   }
@@ -974,7 +1055,7 @@ static void chart_debug_initialize_data_addresses(SimStruct *S)
 
 static const char* sf_get_instance_specialization(void)
 {
-  return "sS1i8eMurl5jCUoRs7XwV0E";
+  return "soIlhDeXKOMMx1F4OaEwWKF";
 }
 
 static void sf_opaque_initialize_c2_landingSimulation(void *chartInstanceVar)
@@ -1086,8 +1167,10 @@ static void mdlSetWorkWidths_c2_landingSimulation(SimStruct *S)
       ssSetInputPortOptimOpts(S, 2, SS_REUSABLE_AND_LOCAL);
       ssSetInputPortOptimOpts(S, 3, SS_REUSABLE_AND_LOCAL);
       ssSetInputPortOptimOpts(S, 4, SS_REUSABLE_AND_LOCAL);
+      ssSetInputPortOptimOpts(S, 5, SS_REUSABLE_AND_LOCAL);
+      ssSetInputPortOptimOpts(S, 6, SS_REUSABLE_AND_LOCAL);
       sf_mark_chart_expressionable_inputs(S,sf_get_instance_specialization(),
-        infoStruct,2,5);
+        infoStruct,2,7);
       sf_mark_chart_reusable_outputs(S,sf_get_instance_specialization(),
         infoStruct,2,1);
     }
@@ -1101,7 +1184,7 @@ static void mdlSetWorkWidths_c2_landingSimulation(SimStruct *S)
 
     {
       unsigned int inPortIdx;
-      for (inPortIdx=0; inPortIdx < 5; ++inPortIdx) {
+      for (inPortIdx=0; inPortIdx < 7; ++inPortIdx) {
         ssSetInputPortOptimizeInIR(S, inPortIdx, 1U);
       }
     }
@@ -1112,10 +1195,10 @@ static void mdlSetWorkWidths_c2_landingSimulation(SimStruct *S)
   }
 
   ssSetOptions(S,ssGetOptions(S)|SS_OPTION_WORKS_WITH_CODE_REUSE);
-  ssSetChecksum0(S,(735431231U));
-  ssSetChecksum1(S,(3170307644U));
-  ssSetChecksum2(S,(4031388353U));
-  ssSetChecksum3(S,(2040640431U));
+  ssSetChecksum0(S,(1242729258U));
+  ssSetChecksum1(S,(1932532221U));
+  ssSetChecksum2(S,(213362949U));
+  ssSetChecksum3(S,(656746049U));
   ssSetmdlDerivatives(S, NULL);
   ssSetExplicitFCSSCtrl(S,1);
   ssSetStateSemanticsClassicAndSynchronous(S, true);
