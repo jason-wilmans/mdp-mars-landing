@@ -4,4 +4,4 @@ Höhe:				70m
 Durchmesser:		3.70m
 Schub (am Boden):	7607kN
 Startmasse:			541t
-Treibstoffgewicht:	~435t (1.1 hat 395,700kg, http://spaceflight101.com/spacerockets/falcon-9-v1-1-f9r/)
+Treibstoffgewicht:	~435t (1.1 hat 395,700kg, 1.2 10% mehr: http://spaceflight101.com/spacerockets/falcon-9-v1-1-f9r/)

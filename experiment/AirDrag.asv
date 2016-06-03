@@ -4,12 +4,13 @@ function [ airDrag ] = AirDrag( speed, rocketDiameter, mass )
     
     area = Area(rocketDiameter);
     
-    if speed >= 0
+    if speed < 0
+        cw = 1.15; % slightly better than a concave plate
+    
+        airDrag = (0.5 * cw * area * density * speed * speed) / mass;
+    else
         cw = 1.15; % slightly better than a concave plate
         airDrag = -1 * (0.5 * cw * area * density * speed * speed) / mass;
-    else
-        cw = 1.15; % slightly better than a concave plate    
-        airDrag = (0.5 * cw * area * density * speed * speed) / mass;        
     end
 end
 
