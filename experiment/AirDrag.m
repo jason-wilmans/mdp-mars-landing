@@ -9,10 +9,11 @@ function [ area ] = Area( rocketDiameter )
 end
 
 function [ cw ] = ResistenceCoefficient()
-    cw = 1.33;
+    %cw = 1.33;
+    cw = 0.78;
 end
 
 function [ density ] = AirDensity()
     % density = 0.00903; % kg / m^3
-    density = 11.481; % kg / m^3
+    density = 1.29; % kg / m^3
 end

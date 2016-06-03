@@ -414,7 +414,7 @@ static void sf_gateway_c2_landingSimulation(SFc2_landingSimulationInstanceStruct
   _SFD_SCRIPT_CALL(2U, chartInstance->c2_sfEvent, -4);
   _SFD_SYMBOL_SCOPE_POP();
   _SFD_EML_CALL(0U, chartInstance->c2_sfEvent, 6);
-  c2_b_acceleration = (-c2_gravity + c2_thrust) + c2_airDrag;
+  c2_b_acceleration = -c2_gravity + c2_airDrag;
   _SFD_EML_CALL(0U, chartInstance->c2_sfEvent, -6);
   _SFD_SYMBOL_SCOPE_POP();
   *chartInstance->c2_acceleration = c2_b_acceleration;
@@ -657,10 +657,10 @@ extern void utFree(void*);
 
 void sf_c2_landingSimulation_get_check_sum(mxArray *plhs[])
 {
-  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(839079161U);
-  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(1901346449U);
-  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(2359015470U);
-  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(168010276U);
+  ((real_T *)mxGetPr((plhs[0])))[0] = (real_T)(1088979960U);
+  ((real_T *)mxGetPr((plhs[0])))[1] = (real_T)(4074119297U);
+  ((real_T *)mxGetPr((plhs[0])))[2] = (real_T)(1844183123U);
+  ((real_T *)mxGetPr((plhs[0])))[3] = (real_T)(502095807U);
 }
 
 mxArray* sf_c2_landingSimulation_get_post_codegen_info(void);
@@ -674,7 +674,7 @@ mxArray *sf_c2_landingSimulation_get_autoinheritance_info(void)
     autoinheritanceFields);
 
   {
-    mxArray *mxChecksum = mxCreateString("JwiEmzkyFDl2if5QGSVpBD");
+    mxArray *mxChecksum = mxCreateString("0NWyeE4pVfzXrJKeKCzfcH");
     mxSetField(mxAutoinheritanceInfo,0,"checksum",mxChecksum);
   }
 
@@ -997,7 +997,7 @@ static void chart_debug_initialization(SimStruct *S, unsigned int
 
         /* Initialization of MATLAB Function Model Coverage */
         _SFD_CV_INIT_EML(0,1,1,0,0,0,0,0,0,0,0,0);
-        _SFD_CV_INIT_EML_FCN(0,0,"eML_blk_kernel",0,-1,339);
+        _SFD_CV_INIT_EML_FCN(0,0,"eML_blk_kernel",0,-1,331);
         _SFD_CV_INIT_SCRIPT(0,1,0,0,0,0,0,0,0,0,0);
         _SFD_CV_INIT_SCRIPT_FCN(0,0,"Thrust",0,-1,135);
         _SFD_CV_INIT_SCRIPT(1,1,0,0,0,0,0,0,0,0,0);
@@ -1055,7 +1055,7 @@ static void chart_debug_initialize_data_addresses(SimStruct *S)
 
 static const char* sf_get_instance_specialization(void)
 {
-  return "soIlhDeXKOMMx1F4OaEwWKF";
+  return "sdJmojHIFAz4jydCUg9o3TE";
 }
 
 static void sf_opaque_initialize_c2_landingSimulation(void *chartInstanceVar)
@@ -1195,10 +1195,10 @@ static void mdlSetWorkWidths_c2_landingSimulation(SimStruct *S)
   }
 
   ssSetOptions(S,ssGetOptions(S)|SS_OPTION_WORKS_WITH_CODE_REUSE);
-  ssSetChecksum0(S,(1242729258U));
-  ssSetChecksum1(S,(1932532221U));
-  ssSetChecksum2(S,(213362949U));
-  ssSetChecksum3(S,(656746049U));
+  ssSetChecksum0(S,(2942057663U));
+  ssSetChecksum1(S,(1804401599U));
+  ssSetChecksum2(S,(2032975417U));
+  ssSetChecksum3(S,(1967726287U));
   ssSetmdlDerivatives(S, NULL);
   ssSetExplicitFCSSCtrl(S,1);
   ssSetStateSemanticsClassicAndSynchronous(S, true);

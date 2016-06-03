@@ -1,6 +1,6 @@
  landingSimulation_sfun
 
- Timestamp is 574ef55a (Wed Jun  1 16:46:50 2016)
+ Timestamp is 57514802 (Fri Jun  3 11:04:02 2016)
 
  Preferred load address is 0000000180000000
 
@@ -37,15 +37,15 @@
 
   Address         Publics by Value              Rva+Base               Lib:Object
 
- 0000:00000000       __guard_fids_count         0000000000000000     <absolute>
- 0000:00000000       __guard_fids_table         0000000000000000     <absolute>
- 0000:00000000       ___safe_se_handler_table   0000000000000000     <absolute>
- 0000:00000000       __guard_longjmp_table      0000000000000000     <absolute>
- 0000:00000000       __guard_iat_count          0000000000000000     <absolute>
- 0000:00000000       __guard_iat_table          0000000000000000     <absolute>
- 0000:00000000       __guard_longjmp_count      0000000000000000     <absolute>
  0000:00000000       __dynamic_value_reloc_table 0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_table          0000000000000000     <absolute>
  0000:00000000       ___safe_se_handler_count   0000000000000000     <absolute>
+ 0000:00000000       ___safe_se_handler_table   0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_table         0000000000000000     <absolute>
+ 0000:00000000       __guard_iat_count          0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_table      0000000000000000     <absolute>
+ 0000:00000000       __guard_longjmp_count      0000000000000000     <absolute>
+ 0000:00000000       __guard_fids_count         0000000000000000     <absolute>
  0000:00000100       __guard_flags              0000000000000100     <absolute>
  0000:00000000       __ImageBase                0000000180000000     <linker-defined>
  0001:00000000       landingSimulation_initializer 0000000180001000 f   landingSimulation_sfun.obj
@@ -352,23 +352,23 @@
  0001:0000f5f4       _crt_at_quick_exit         00000001800105f4 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
  0001:0000f5fa       _cexit                     00000001800105fa f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
  0001:0000f600       terminate                  0000000180010600 f   ucrt:api-ms-win-crt-runtime-l1-1-0.dll
- 0001:0000f608       __acrt_initialize          0000000180010608 f   MSVCRT:ucrt_stubs.obj
  0001:0000f608       __scrt_stub_for_acrt_initialize 0000000180010608 f   MSVCRT:ucrt_stubs.obj
  0001:0000f608       __vcrt_initialize          0000000180010608 f   MSVCRT:ucrt_stubs.obj
- 0001:0000f60c       __scrt_stub_for_acrt_thread_attach 000000018001060c f   MSVCRT:ucrt_stubs.obj
- 0001:0000f60c       __vcrt_thread_attach       000000018001060c f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f608       __acrt_initialize          0000000180010608 f   MSVCRT:ucrt_stubs.obj
  0001:0000f60c       __acrt_thread_attach       000000018001060c f   MSVCRT:ucrt_stubs.obj
- 0001:0000f610       __vcrt_thread_detach       0000000180010610 f   MSVCRT:ucrt_stubs.obj
- 0001:0000f610       __acrt_thread_detach       0000000180010610 f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f60c       __vcrt_thread_attach       000000018001060c f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f60c       __scrt_stub_for_acrt_thread_attach 000000018001060c f   MSVCRT:ucrt_stubs.obj
  0001:0000f610       __scrt_stub_for_acrt_thread_detach 0000000180010610 f   MSVCRT:ucrt_stubs.obj
- 0001:0000f614       __acrt_uninitialize        0000000180010614 f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f610       __acrt_thread_detach       0000000180010610 f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f610       __vcrt_thread_detach       0000000180010610 f   MSVCRT:ucrt_stubs.obj
  0001:0000f614       __vcrt_uninitialize        0000000180010614 f   MSVCRT:ucrt_stubs.obj
  0001:0000f614       __scrt_stub_for_acrt_uninitialize 0000000180010614 f   MSVCRT:ucrt_stubs.obj
- 0001:0000f618       __scrt_stub_for_acrt_uninitialize_critical 0000000180010618 f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f614       __acrt_uninitialize        0000000180010614 f   MSVCRT:ucrt_stubs.obj
  0001:0000f618       __vcrt_uninitialize_critical 0000000180010618 f   MSVCRT:ucrt_stubs.obj
  0001:0000f618       __acrt_uninitialize_critical 0000000180010618 f   MSVCRT:ucrt_stubs.obj
- 0001:0000f61c       __scrt_stub_for_is_c_termination_complete 000000018001061c f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f618       __scrt_stub_for_acrt_uninitialize_critical 0000000180010618 f   MSVCRT:ucrt_stubs.obj
  0001:0000f61c       _is_c_termination_complete 000000018001061c f   MSVCRT:ucrt_stubs.obj
+ 0001:0000f61c       __scrt_stub_for_is_c_termination_complete 000000018001061c f   MSVCRT:ucrt_stubs.obj
  0001:0000f630       _guard_dispatch_icall_nop  0000000180010630 f   MSVCRT:_guard_dispatch_.obj
  0002:00000000       __imp_SetUnhandledExceptionFilter 0000000180011000     kernel32:KERNEL32.dll
  0002:00000008       __imp_IsProcessorFeaturePresent 0000000180011008     kernel32:KERNEL32.dll
@@ -559,10 +559,10 @@
  0002:000005d0       __real@4026f645a1cac083    00000001800115d0     c2_landingSimulation.obj
  0002:000005d8       __real@408f400000000000    00000001800115d8     c2_landingSimulation.obj
  0002:000005e0       __real@40c3240000000000    00000001800115e0     c2_landingSimulation.obj
- 0002:000005e8       __real@41a4074448000000    00000001800115e8     c2_landingSimulation.obj
- 0002:000005f0       __real@41c901aa7c800000    00000001800115f0     c2_landingSimulation.obj
- 0002:000005f8       __real@41dc550fa4400000    00000001800115f8     c2_landingSimulation.obj
- 0002:00000600       __real@41e1937705c00000    0000000180011600     c2_landingSimulation.obj
+ 0002:000005e8       __real@41bded5fbf000000    00000001800115e8     c2_landingSimulation.obj
+ 0002:000005f0       __real@41d03a20fe000000    00000001800115f0     c2_landingSimulation.obj
+ 0002:000005f8       __real@41db7b0014c00000    00000001800115f8     c2_landingSimulation.obj
+ 0002:00000600       __real@41ee5ac410200000    0000000180011600     c2_landingSimulation.obj
  0002:00000610       __xmm@80000000000000008000000000000000 0000000180011610     c2_landingSimulation.obj
  0002:00000620       _ssBadLevel2InputAccessMsg 0000000180011620     landingSimulation_sfun_registry.obj
  0002:000007b0       _ssBadLevel2DirectFeedMsg  00000001800117b0     landingSimulation_sfun_registry.obj
