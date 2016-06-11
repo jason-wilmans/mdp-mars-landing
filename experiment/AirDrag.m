@@ -1,10 +1,10 @@
-function [ airDrag ] = AirDrag( speed, rocketDiameter, mass, height )    
+function [ airDrag, density ] = AirDrag( speed, rocketDiameter, mass, height )    
     density = Density(height);
     
     area = Area(rocketDiameter);
     
     if speed >= 0
-        cw = 0.34; % convex half sphere (approximation of rocket tip)
+        cw = 0.1; % better than convex half sphere (approximation of rocket tip)
         airDrag = -1 * (0.5 * cw * area * density * speed * speed) / mass;
     else
         cw = 1.10; % concave half sphere (approximation of jet outlet)
@@ -26,6 +26,6 @@ function [ density ] = Density( height )
 	gasConstant = 287.058;
    
    hPa = 1013.25 * (1 - (0.0065 * height) / 288.15).^5.255;
-   density = hPa / (gasConstant * temperature);
-   density = 1.293;
+   density = hPa / (gasConstant * temperature) * 100;
+   %density = 1.293;
 end
