@@ -1,4 +1,7 @@
-Angenommene Rakete: Falcon 9 v 1.2 (https://de.wikipedia.org/wiki/Falcon_9)
+Angenommene Rakete: Falcon 9 v 1.1 (https://de.wikipedia.org/wiki/Falcon_9)
+===================================================================================
+
+Grund: Recht aktuell, meiste Daten verfügbar, klein
 
 Höhe:				70m
 Durchmesser:		3.70m
@@ -11,3 +14,12 @@ https://www.youtube.com/watch?v=plF0yQzu3qg
 
 Data Points:
 Falcon 9 v1.1 Start Data.ods
+
+Atmosphäre
+===================================================================================
+Druck vereinfachend entsprechend Internationalem Standardmodell
+
+Gaskonstante zusammengerechnet nach durchschnittlichen Anteilen (siehe mars gas constant spreadsheet)
+Quelle für Anteile: https://en.wikipedia.org/wiki/Atmosphere_of_Mars#/media/File:PIA16460_Mars_Atmosphere_Gases_20121102.svg
+
+Quelle für Temperaturgradienten (http://wincontact32naturwunder.blogspot.de/2012/02/planet-mars-35-marsatmosphare-i.html)

@@ -19,13 +19,22 @@ end
 function [ density ] = Density( height )
 % result is gas density in kg * m^3
    
+    % earth    
+    % (https://de.wikipedia.org/wiki/Gaskonstante#Spezifische_Gaskonstante)
+	% gasConstant = 287.058;
     % 15°C in K, (international standard atmosphere, https://de.wikipedia.org/wiki/Barometrische_Höhenformel)
-    temperature = 288.15;
+    % temperature = 288.15;
+    % groundPressure = 1013.3;
+    % temperatureGradient = 0.0065;    
     
-    %earth (https://de.wikipedia.org/wiki/Gaskonstante#Spezifische_Gaskonstante)
-	gasConstant = 287.058;
-   
-   hPa = 1013.25 * (1 - (0.0065 * height) / 288.15).^5.255;
-   density = hPa / (gasConstant * temperature) * 100;
-   %density = 1.293;
+    % mars https://de.wikipedia.org/wiki/Mars_(Planet)
+    temperature = 218.0;
+    %(https://de.wikipedia.org/wiki/Gaskonstante#Spezifische_Gaskonstante + calculation)
+    gasConstant = 191.5204402;
+    % https://de.wikipedia.org/wiki/Mars_(Planet)
+    groundPressure = 6.36;
+    temperatureGradient = 0.0043;
+       
+   hPa = groundPressure * (1 - (temperatureGradient * height) / temperature).^5.255;
+   density = hPa / (gasConstant * temperature) * 100;   
 end
