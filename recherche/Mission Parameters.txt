@@ -29,3 +29,9 @@ Quelle für Temperaturgradienten: http://wincontact32naturwunder.blogspot.de/201
 Entry parameters
 ===================================================================================
 Initial speed: 7300 m / s (https://en.wikipedia.org/wiki/Mars_atmospheric_entry)
+
+Parachute size
+===================================================================================
+Could be about 33,528 (110 feet)
+
+https://www.theguardian.com/science/2014/jun/01/mars-bigger-parachute-nasa-hawaii
