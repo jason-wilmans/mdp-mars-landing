@@ -7,21 +7,14 @@ function [ airDrag, density ] = AirDrag( speed, rocketDiameter, mass, height, pa
     airDrag = (0.5 * cw * area * density * speed * speed) / mass;     
 end
 
-function [ area ] = Area( rocketDiameter, parachuteDeployed)
-    if parachuteDeployed
-        diameter = 33.528;
-    else
-        diameter = rocketDiameter;
-    end
-    
-    area = (3.14195 * diameter * diameter) / 4;
+function [ area ] = Area( rocketDiameter,)
+    area = (3.14195 * rocketDiameter * rocketDiameter) / 4;
 end
 
 function [ cw ] = DragCoefficient(speed, parachuteDeployed)
     % parachute overrides everything. Else, direction of movement is
     % relevant: moving down the rocjet hits with the exhaust, upwards with
-    % it's tip. Also the direction of the force is opposite of the
-    % movement.
+    % it's tip.
     
     if (parachuteDeployed)
         cw = 1.33; % parachute approximation
