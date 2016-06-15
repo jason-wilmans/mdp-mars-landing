@@ -1,9 +1,10 @@
 function [ airDrag, density ] = AirDrag( speed, rocketDiameter, mass, height, parachuteDeployed )    
-    density = Density(height);
-    
+      
     area = Area(rocketDiameter, parachuteDeployed);
     cw = DragCoefficient(speed, parachuteDeployed);
-       
+
+    pressure = Pressure(height);
+    density = ToDensity(pressure);
     airDrag = (0.5 * cw * area * density * speed * speed) / mass;     
 end
 
@@ -38,7 +39,7 @@ function [ cw ] = DragCoefficient(speed, parachuteDeployed)
     end
 end
 
-function [ density ] = Density( height )
+function [ pressure ] = Pressure( height )
 % result is gas density in kg * m^3
    
     % earth    
@@ -58,7 +59,26 @@ function [ density ] = Density( height )
     temperatureGradient = 0.0043;
        
     
-   heightCoefficient = (1 - (temperatureGradient * height) / temperature);
-   hPa = groundPressure * max(heightCoefficient, 0).^5.255;
-   density = hPa / (gasConstant * temperature) * 100;   
+   % heightCoefficient = (1 - (temperatureGradient * height) / temperature);
+   % hPa = groundPressure * max(heightCoefficient, 0).^5.255;
+   %density = hPa / (gasConstant * temperature) * 100;   
+   
+   height = 0;
+   if height >= 7000
+       T = -31 - 0.000998 * height;
+       p = 0.699 * exp(-0.00009 * height);
+   else
+       T = -23.4 - 0.00222 * height;
+       p = .699 * exp(-0.00009 * height);
+   end
+   
+   pressure = p / (0.1921 * (T + 273.1)) * 1000;
+end
+
+function [ density ] = ToDensity(pressure)
+    molMass = 0.0440095;
+    co2GasConstant = 191.5204402;
+    temp = 218.0;
+    density = (pressure * molMass) / (co2GasConstant * temp);
+    
 end
