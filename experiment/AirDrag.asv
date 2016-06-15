@@ -63,7 +63,6 @@ function [ pressure ] = Pressure( height )
    % hPa = groundPressure * max(heightCoefficient, 0).^5.255;
    %density = hPa / (gasConstant * temperature) * 100;   
    
-   height = 0;
    if height >= 7000
        T = -31 - 0.000998 * height;
        p = 0.699 * exp(-0.00009 * height);
@@ -72,13 +71,12 @@ function [ pressure ] = Pressure( height )
        p = .699 * exp(-0.00009 * height);
    end
    
-   pressure = p / (0.1921 * (T + 273.1)) * 1000;
+   pressure = p / (0.1921 * (T + 273.1));
 end
 
 function [ density ] = ToDensity(pressure)
-    molMass = 0.0440095;
+    molMass = 44.0095;
     co2GasConstant = 191.5204402;
-    temp = 218.0;
-    density = (pressure * molMass) / (co2GasConstant * temp);
-    
+    temp = 
+    density = (pressure * molMass) / (co2GasConstant * 218.0);
 end

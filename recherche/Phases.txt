@@ -5,21 +5,41 @@ Start:		-
 End:		100 km
 
 Description:
-Rocket approaches Mars from free space at around 7300 m/s
+Rocket approaches Mars from free space at around 7300 m/s. Encounters
+outskirts of outer atmosphere.
 
 Controller Values:
+-
+
+Phase II (Parachute)
+==========================================================================
+
+Start:		100 km
+End:		2500 m
+
+Description:
+Atmosphere thick enough for deployment of parachute. It slows down what
+possible, also stabilizing the rocket's trajectory and angle.
+
+Controller Values:
+
 -
 
 Phase III (Controlled Descent)
 ==========================================================================
 
-Start:		100 km
-End:		?
+Start:		2500 m
+End:		100 m
 
 Description:
-
+Atmosphere thick enough for thrusters to work effectively. Speed is
+significantly reduced, and thn regulated to fit Touch-Down phase entry.
 
 Controller Values:
+
+Regulated = speed
+
+
 P = 1.32827832723259
 I = 0.287295030023929
 D = 0.974512189960466
@@ -30,12 +50,12 @@ anti-windup method = back-calculation ( Kb 1 )
 Phase IV (Touch-Down)
 ==========================================================================
 
-Start:		100 km
-End:		?
+Start:		100 m
+End:		0 m
 
 Description:
 Rocket comes in relatively fast to minimalize wind influence. Rest speed
-is reduced eith full thrust. Then a smooth drop for the last 2 meters.
+is reduced with full thrust. Then a smooth drop for the last 2 meters.
 
 Controller Values:
 
