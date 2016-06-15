@@ -3,3 +3,5 @@ precompile/
 _jitprj/
 EMLReport/
 _self/
+autosave
+*.autosave
