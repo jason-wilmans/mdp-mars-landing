@@ -3,7 +3,7 @@ function [ airDrag, density ] = AirDrag( speed, rocketDiameter, mass, height, pa
     area = Area(rocketDiameter, parachuteDeployed);
     cw = DragCoefficient(speed, parachuteDeployed);
 
-    height = 0;
+    %height = 0;
     pressure = Pressure(height);
     density = ToDensity(pressure);
     airDrag = (0.5 * cw * area * density * speed * speed) / mass;     
@@ -79,5 +79,6 @@ function [ density ] = ToDensity(pressure)
     molMass = 0.0440095;
     co2GasConstant = 191.5204402;
     temp = 218.0;
-    density = (pressure * molMass) / (co2GasConstant * temp);    
+    density = (pressure * molMass) / (co2GasConstant * temp);
+    desnity = pressure;
 end
