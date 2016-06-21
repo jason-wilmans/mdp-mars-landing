@@ -80,5 +80,5 @@ function [ density ] = ToDensity(pressure)
     co2GasConstant = 191.5204402;
     temp = 218.0;
     density = (pressure * molMass) / (co2GasConstant * temp);
-    desnity = pressure;
+    density = pressure;
 end
