@@ -21,7 +21,7 @@ end
 
 function [ cw ] = DragCoefficient(speed, parachuteDeployed)
     % parachute overrides everything. Else, direction of movement is
-    % relevant: moving down the rocjet hits with the exhaust, upwards with
+    % relevant: moving down the rocket hits with the exhaust, upwards with
     % it's tip. Also the direction of the force is opposite of the
     % movement.
     
