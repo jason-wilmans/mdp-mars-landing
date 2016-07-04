@@ -28,6 +28,8 @@ Quelle für Temperaturgradienten: http://wincontact32naturwunder.blogspot.de/201
 
 https://www.grc.nasa.gov/www/k-12/airplane/atmosmrm.html
 
+http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html
+
 Entry parameters
 ===================================================================================
 Initial speed: 7300 m / s (https://en.wikipedia.org/wiki/Mars_atmospheric_entry)
