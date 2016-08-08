@@ -1,0 +1,18 @@
+==================================================================
+Pathfinder
+==================================================================
+
+Short description
+-----------------------------
+Phase I:
+Approaches atmosphere with ~7300 m/s starting at 125.000 m. Spins with ~2 rpm. Entry angle: 14.8 degrees. Heatshield slows down via drag to around 400 m/s (2-3 minutes).
+
+Phase II:
+24 ft parachute at about 5 - 11 km. Slow down to ~ 65 m/s.
+
+Phase III:
+3 solid boosters, ca. 1 ton of force for two seconds, halt at 12 +/- 10 meters.
+
+Phase IV:
+Drop ball (details ignored)
+

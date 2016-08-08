@@ -17,6 +17,8 @@ Falcon 9 v1.1 Start Data.ods
 
 Atmosphäre
 ===================================================================================
+Beginnt bei ca. 125.000 m über Oberfläche (http://mars.nasa.gov/MPF/mpf/edl/edl1.html)
+
 Druck vereinfachend entsprechend Internationalem Standardmodell
 
 Gaskonstante zusammengerechnet nach durchschnittlichen Anteilen (siehe mars gas constant spreadsheet)
@@ -36,6 +38,6 @@ Initial speed: 7300 m / s (https://en.wikipedia.org/wiki/Mars_atmospheric_entry)
 
 Parachute size
 ===================================================================================
-Could be about 33,528 (110 feet)
+Could be about 33,528 m (110 feet)
 
 https://www.theguardian.com/science/2014/jun/01/mars-bigger-parachute-nasa-hawaii
