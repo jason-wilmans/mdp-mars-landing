@@ -1,2 +1,7 @@
 http://mars.nasa.gov/MPF/mpf/edl/edl1.html
 http://mars.nasa.gov/MPF/
+https://de.wikipedia.org/wiki/Mars_(Planet)
+http://www.planetary.org/blogs/emily-lakdawalla/2012/06221711-how-curiosity-land-part-1.html
+http://www.nasa.gov/centers/ames/research/msl_heatshield.html (Heat shield specifics)
+http://www.nasa.gov/centers/ames/images/content/671692main_MarsScienceLabHeatshield017a%5B2%5D.jpeg (Heat Shield photo)
+http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html (Mars stats)
