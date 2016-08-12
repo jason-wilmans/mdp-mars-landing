@@ -1,0 +1,1 @@
+Note the artifact of slow speed increase(!) around second 9. Artifact due to singularity in atmospheric model

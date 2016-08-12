@@ -26,11 +26,7 @@ Quelle für Anteile: https://en.wikipedia.org/wiki/Atmosphere_of_Mars#/media/Fil
 
 Quelle für Temperaturgradienten (benutzt): https://books.google.de/books?id=eXWOCgAAQBAJ&pg=PA33&lpg=PA33&dq=temperaturgradient+mars&source=bl&ots=M6OK3aTPfr&sig=RlXgyGEtdTClWpz--uJmSHMeXQY&hl=de&sa=X&ved=0ahUKEwjDmYeQvKDNAhXhB5oKHaJzAGYQ6AEIUzAJ#v=onepage&q=temperaturgradient%20mars&f=false
 
-Quelle für Temperaturgradienten: http://wincontact32naturwunder.blogspot.de/2012/02/planet-mars-35-marsatmosphare-i.html
 
-https://www.grc.nasa.gov/www/k-12/airplane/atmosmrm.html
-
-http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html
 
 Entry parameters
 ===================================================================================
