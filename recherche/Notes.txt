@@ -1,1 +1,6 @@
+Atmospheric model is tweaked to achieve 0.2 kg/m^3 density at ground
+
 Note the artifact of slow speed increase(!) around second 9. Artifact due to singularity in atmospheric model
+
+Ignore hypersonic flight
+Ignore produced lift
