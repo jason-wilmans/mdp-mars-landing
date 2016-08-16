@@ -4,3 +4,5 @@ Note the artifact of slow speed increase(!) around second 9. Artifact due to sin
 
 Ignore hypersonic flight
 Ignore produced lift
+
+Chute opens instantaneously
