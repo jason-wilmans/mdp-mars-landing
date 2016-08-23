@@ -11,3 +11,5 @@ Quelle für Temperaturgradienten: http://wincontact32naturwunder.blogspot.de/201
 https://www.grc.nasa.gov/www/k-12/airplane/atmosmrm.html
 
 http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html
+http://www.rocket.com/article/aerojet-propulsion-helps-land-mars-science-laboratory (Thruster Selection)
+http://www.rocket.com/propulsion-systems/monopropellant-rockets (Thruster Strength)
