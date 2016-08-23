@@ -6,3 +6,5 @@ Ignore hypersonic flight
 Ignore produced lift
 
 Chute opens instantaneously
+
+terminal velocity after chute approaches reals speed really closely
