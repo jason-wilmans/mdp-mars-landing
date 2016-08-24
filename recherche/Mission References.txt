@@ -16,3 +16,24 @@ Phase III:
 Phase IV:
 Drop ball (details ignored)
 
+
+
+==================================================================
+Mars Science Laboratory
+==================================================================
+
+Short description
+-----------------------------
+Phase I:
+Approaches atmosphere with ~5630 m/s starting at 125.000 m. Stops ~2 rpm spin. Entry angle: 14.8 degrees. Heatshield slows down via drag to around 578 - 470 (depending on source) m/s in ~4 mins. Flies guided with a tilted angle of attack, producing lift.
+
+Phase II:
+24 ft parachute at about 5 - 11 km. Slow down to ~ 65 m/s.
+
+Phase III:
+3 solid boosters, ca. 1 ton of force for two seconds, halt at 12 +/- 10 meters.
+
+Phase IV:
+Drop ball (details ignored)
+
+Entry Mass: 3380 kg
