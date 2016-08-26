@@ -7,4 +7,8 @@ Ignore produced lift
 
 Chute opens instantaneously
 
-terminal velocity after chute approaches reals speed really closely
+terminal velocity after chute approaches real speed really closely
+
+height needed to cancel out speed: ~776m + 25% safety zone = 970
+
+parachutes land with 3.5 - 5 m/s downward speed : 5 m/s = upper boundary for landing speed
