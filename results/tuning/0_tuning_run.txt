@@ -1,6 +1,6 @@
-Conditions
+Linearization Conditions
 ----------------------------------------
-Linearized at 862.5 m. Simulation time: 420 s. Start speed: .1 m/s downwards. Fuel Consumption: 1.3kg/s
+Linearized at 862.5 m. Simulation time: 420 s. Start speed: .1 m/s downwards. Fuel Consumption: 1.3kg/s Brutto Weight: 
 
 #	Response Time(s)	Transient Behaviour		P						I						D						N						Observations
 =============================================================================================================================================================================================
@@ -9,3 +9,44 @@ Linearized at 862.5 m. Simulation time: 420 s. Start speed: .1 m/s downwards. Fu
 3	1.04				0.85					-0.0153010667775675		-0.000171629359924682	-0.30309083873034		219.730125703893		~2.5 m & ~85 kg left => 0.03 m/s
 4	1.04				0.75					-0.0153010667775675		-0.000171629359924682	-0.30309083873034		219.730125703893		exactly the same? observed: PIDN unaffected
 5	1.04				0.3						-0.101931030990562		-0.00785145205732209	-0.307932080908474		4.08169933510555		Touchdown! & ~315,3 kg left => 0.004 m/s
+
+Landing Scenario Results
+----------------------------------------
+Start Height: "Death Zone" Limit (1725 m)
+Direction: -90°
+
+#	Start speed (m/s) 	Speed on Impact (m/s)	Observations
+=============================================================================================================================================================================================
+1	110					63.943
+
+Linearization Conditions
+----------------------------------------
+Linearized at 2000 m. Simulation time: 420 s. Start speed: 105 m/s downwards. Fuel Consumption: 2.165 kg/s
+
+Nominal speed: 60 m/s, Worst Case: 150 m/s => (150 + 60) / 2 = 105
+
+#	Response Time(s)	Transient Behaviour		P						I						D						N						Observations
+=============================================================================================================================================================================================
+6	1.0					0.1						-0.260261530494783		-0.00451978779024518	-0.113500692010872		4.24582671584607		~0.95 m & ~65 kg left => 0.016 m/s
+7	1.0					0.5						-0.112982390626774		-0.0157430169075228		-0.187690121812987		20.9794311620465		Crash! & ~370 kg left => 71.534 m/s
+8	1.0					0.25					-0.189067412069346		-0.00326181219849996	-0.152809036805676		5.41293789257892		~0.96 m & ~65 kg left => 0.016 m/s
+(enabled variable step size)
+9	0.5					0.5						-0.260413777194384		-0.00863622928140955	-0.390550596030906		457.131190416641		Touchdown 294.7 s & ~151 kg left => 0.139 m/s
+10	0.25				0.25					-0.557355356122812		-0.0190660411110404		-0.360410663601019		41.9588623240931		Touchdown 270.3 s & ~169 kg left => 0.179 m/s
+11	0.25				0.125					-0.756739783295814		-0.0260913238372255		-0.322114512887151		21.8158810168648		Touchdown 270.3 s & ~147 kg left => 0.006 m/s
+12	0.25				0.75					-0.0415699480312945		-0.00097006448350144	-0.395803226524213		457.131190416641		Touchdown 176.8 s & ~236 kg left => 0.192 m/s
+
+Landing Scenario Results
+----------------------------------------
+Start Height: 2000 m
+Direction: -90°
+
+#	Start speed (m/s) 	Speed on Impact (m/s)	Observations
+=============================================================================================================================================================================================
+2	110					0.635					Significantly raises time to touchdown only 5 m/s (faster) start!
+3	60					0.051					Fast descent and extremly soft landing
+4	50					0.078					Fast descent and extremly soft landing
+5	70					-						Makes full stop, then escalating behavior until tank is empty
+6	80					0.007					Fast descent and extremly soft landing
+7	90					0.114					Fast descent and extremly soft landing
+8	120					0.091					Fast descent and extremly soft landing

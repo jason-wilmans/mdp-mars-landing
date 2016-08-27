@@ -36,12 +36,12 @@ Phase III:
 Phase IV:
 Drop ball (details ignored)
 
-Mass
+Mass(kg)
 -----------------------------
-Combined: 			3.893 kg
-Cruise Stage: 		539 kg
-EDL System:			2401 kg
-Rover:				899 kg
-Fuel Weight:		390 kg
-
-Vehicle w/o Fuel:	3503 kg
+Combined: 			3.893
+Cruise Stage: 		539
+EDL System:			2401
+Rover:				899
+Fuel Weight:		390
+Combined w/o Fuel:	3503
+EDL w/o Fuel:		2011
