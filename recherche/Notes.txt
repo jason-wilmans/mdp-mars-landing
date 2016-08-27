@@ -10,8 +10,10 @@ Chute opens instantaneously
 terminal velocity after chute approaches real speed really closely
 
 
-
+Landing Speeds
+-------------------
 parachutes land with 3.5 - 5 m/s downward speed : 5 m/s = upper boundary for landing speed
+nasa approximates .75 m/s for EDL/MSL sky crane (Way et al. 2006)
 
 rotation assumed to be perfect => inverse normalized speed (Ignore produced lift :()
 
@@ -20,10 +22,14 @@ rotation assumed to be perfect => inverse normalized speed (Ignore produced lift
 -------------------
 determined "death zone" experimentally:
 height needed to cancel out speed: ~1380 m + 25% safety zone = 1725
+fun fact: NASA set their start range to 1500 - 2000! and ~100m/s (Way et al. 2006)
 linearization at half: 862.5
 
+observation:
 delta in height causes non-linear difference for y of extreme point:
 correct, because dead + ramp up time for thrusters proportion increases non-linearly for whole time => distance is time of non-slowed descent * speed
 
 had doubts about model correctness, but model is correct:
 canceling out speed in low delta height is (practically) constant.
+
+Observation: simulation resolution greatly impacts results
