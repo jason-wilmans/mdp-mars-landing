@@ -3,12 +3,27 @@ Atmospheric model is tweaked to achieve 0.2 kg/m^3 density at ground
 Note the artifact of slow speed increase(!) around second 9. Artifact due to singularity in atmospheric model
 
 Ignore hypersonic flight
-Ignore produced lift
+
 
 Chute opens instantaneously
 
 terminal velocity after chute approaches real speed really closely
 
-height needed to cancel out speed: ~776m + 25% safety zone = 970
+
 
 parachutes land with 3.5 - 5 m/s downward speed : 5 m/s = upper boundary for landing speed
+
+rotation assumed to be perfect => inverse normalized speed (Ignore produced lift :()
+
+
+"Death Zone"
+-------------------
+determined "death zone" experimentally:
+height needed to cancel out speed: ~1380 m + 25% safety zone = 1725
+linearization at half: 862.5
+
+delta in height causes non-linear difference for y of extreme point:
+correct, because dead + ramp up time for thrusters proportion increases non-linearly for whole time => distance is time of non-slowed descent * speed
+
+had doubts about model correctness, but model is correct:
+canceling out speed in low delta height is (practically) constant.
