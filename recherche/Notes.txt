@@ -33,7 +33,7 @@ correct, because dead + ramp up time for thrusters proportion increases non-line
 had doubts about model correctness, but model is correct:
 canceling out speed in low delta height is (practically) constant.
 
-Observation: simulation resolution greatly impacts results
+Observation: simulation resolution greatly impacts results (discrete-time controller as opposed to continuous seems to help)
 
 Fuel Consumptions
 -------------------
