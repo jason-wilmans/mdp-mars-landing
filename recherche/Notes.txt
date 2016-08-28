@@ -23,7 +23,7 @@ rotation assumed to be perfect => inverse normalized speed (Ignore produced lift
 -------------------
 determined "death zone" experimentally:
 height needed to cancel out 150 m/s with oerfect orientation: ~1666 m (experimentally)
-fun fact: NASA set their start range to 1500 - 2000! and ~100m/s (Way et al. 2006)
+fun fact: NASA set their start range to 1500 - 2000! and ~100m/s (Way et al. (2006))
 linearization (working point) at half: 862.5
 
 observation:
@@ -47,3 +47,14 @@ What seems to help:
 discrete-time controller as opposed to continuous seems to help
 controller setup! Don't feed controller with extreme values from other regions (in this case height) and switch output.
 Instead, switch controller input to zero in uninteresting regions. Controller output will be 0.
+
+
+Angle Test Range
+-------------------
+Theoretically acceptable angles: -25 to -10 ° Wells (2006) respectively -14 to -15.5 (Edquist et al. (2009))
+
+Mach Speeds
+-------------------
+Mach Speed calculated after formula (https://de.wikipedia.org/wiki/Mach-Zahl)
+k and Rs approximated (see Mars Atmosphere Gas Constant.ods)
+T is according to Atmosphere Model (https://www.grc.nasa.gov/www/k-12/airplane/atmosmrm.html)
