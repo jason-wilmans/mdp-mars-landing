@@ -1,0 +1,23 @@
+Linearization Conditions
+----------------------------------------
+same as attempt 2. Reason for new run: Changed the setup of the controller switch. made calculation way more stable and faster, but ruined the tuning :(
+
+Linearized at 2000 m. Simulation time: 420 s. Start speed: 105 m/s downwards. Fuel Consumption: 2.165 kg/s
+
+Nominal speed: 60 m/s, Worst Case: 150 m/s => (150 + 60) / 2 = 105
+
+#	Response Time(s)	Transient Behaviour		P						I						D						N						Observations
+=============================================================================================================================================================================================
+1	1.0					0.5						-0.0577479980702897		-0.00398279547755575	-0.191562273885943		20.9794311620465		Crash! ~22s & => 98.121 m/s
+2	1.0					0.25					-0.174766606064958		-0.0030099135324723		-0.158108063612479		5.41293789257892		~1.2 m & ~72 kg left => 42.8 m/s
+3	1.0					0.125					-0.230978425577007		-0.00400237658990455	-0.12957630679279		4.24582671584607		practically same as 2, infinitesimally closer
+4	0.5					0.5						-0.230225980129958		-0.00757858087487382	-0.391406440958287		457.131190416641		escalation
+5	0.5					0.24					-0.554339237625107		-0.0189604747293541		-0.360410288503992		41.9588623240931		Crash! ~27s & => 53.275 m/s
+
+Landing Scenario Results
+----------------------------------------
+Start Height: 2000 m
+Direction: -90°
+
+#	Start speed (m/s) 	Speed on Impact (m/s)	Observations
+=============================================================================================================================================================================================
