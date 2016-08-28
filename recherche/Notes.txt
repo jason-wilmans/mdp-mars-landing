@@ -33,9 +33,17 @@ correct, because dead + ramp up time for thrusters proportion increases non-line
 had doubts about model correctness, but model is correct:
 canceling out speed in low delta height is (practically) constant.
 
-Observation: simulation resolution greatly impacts results (discrete-time controller as opposed to continuous seems to help)
-
 Fuel Consumptions
 -------------------
 Is estimated with a powered descent time of 3 min
 390kg / 3 * 60s = 2,16 kg/s at full throttle
+
+Model Instability
+-------------------
+Simulation resolution greatly impacts results.
+had errors with overflows/masked zero crossings. Extremely slow with fixed time.
+
+What seems to help:
+discrete-time controller as opposed to continuous seems to help
+controller setup! Don't feed controller with extreme values from other regions (in this case height) and switch output.
+Instead, switch controller input to zero in uninteresting regions. Controller output will be 0.
