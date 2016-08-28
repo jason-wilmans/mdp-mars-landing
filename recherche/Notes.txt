@@ -58,3 +58,6 @@ Mach Speeds
 Mach Speed calculated after formula (https://de.wikipedia.org/wiki/Mach-Zahl)
 k and Rs approximated (see Mars Atmosphere Gas Constant.ods)
 T is according to Atmosphere Model (https://www.grc.nasa.gov/www/k-12/airplane/atmosmrm.html)
+
+artifact: achieve nearly horizontal flight leading up to parachute deployment (between 1 and 2
+km/s) (Wells)
