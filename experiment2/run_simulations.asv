@@ -1,0 +1,12 @@
+mdl = 'Landing';
+load_system(mdl);
+
+angle.time = [];
+angle.singa= -14.8;
+
+sim(mdl);
+
+%fileID = fopen('myfile.txt','w');
+%fprintf(fileID, '%4.2f', airSpeed);
+%fclose(fileID);
+disp('done');
