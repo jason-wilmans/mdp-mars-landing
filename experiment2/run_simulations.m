@@ -28,10 +28,10 @@ for lift = 0.0:0.1:0.3
             disp('Starting sim');
             sim(mdl);
             
-            dump(outputFolder, 'speed.out', speed);
-            dump(outputFolder, 'airSpeed.out', airSpeed);
-            dump(outputFolder, 'position.out', position);
-            dump(outputFolder, 'acceleration.out', acceleration);            
+            dump(speedFolder, 'speed.out', speed);
+            dump(speedFolder, 'airSpeed.out', airSpeed);
+            dump(speedFolder, 'position.out', position);
+            dump(speedFolder, 'acceleration.out', acceleration);            
         end
     end
 end
