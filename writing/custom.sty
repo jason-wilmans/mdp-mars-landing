@@ -1,0 +1,73 @@
+%% ------------------------------------------------------------------
+%% Einige Scripte, die man in LaTEX immer mal wieder gebrauchen kann.
+%% ------------------------------------------------------------------
+
+% benötigte imports
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{ifthen}
+
+%% ------------------------------------------------------------------
+%%	Define a unified quote
+%% ------------------------------------------------------------------
+\newcommand{\jQuote}[1]
+{
+{
+	\hsize = 5 in
+	\parindent = 0 pt
+	\leftskip = 0.25 in
+	\it
+	#1
+}
+}
+
+%% ------------------------------------------------------------------
+%% 	Define a unified centered image (whole page width)
+%%	usage: \centerImage{filename}{scale}{caption}
+%% ------------------------------------------------------------------
+\newcommand{\centerImage}[3]{
+	\begin{figure}[h!]
+		\centering
+		\includegraphics[scale=#2]{./images/#1}
+		\caption{#3}
+		\label{fig:#1}
+	\end{figure}
+}
+
+%% ------------------------------------------------------------------
+%%	Define a unified centered image (whole page width)
+%%	usage: \floatImage{filename}{image scale}{caption}{position}
+%% ------------------------------------------------------------------
+\newcommand{\floatImage}[4]{
+	\begin{wrapfigure}{#4}{#2\textwidth}
+		\includegraphics[width=#2\textwidth]{./images/#1}
+		\caption{#3}
+		\label{fig:#1}
+	\end{wrapfigure}
+}
+
+%% ------------------------------------------------------------------
+%%	Define a macro for image insertion with float environment
+%%	usage: \customImage{filename}{scale}{position}{caption}
+%% ------------------------------------------------------------------
+\newcommand{\customImage}[4]{
+	\begin{wrapfigure}{#3}{#2\linewidth}
+		\includegraphics[scale=1]{./images/#1}
+		\caption{#4}
+		\label{fig:#1}
+	\end{wrapfigure}
+}
+
+%% ------------------------------------------------------------------
+%%	Renders a captioned figure.
+%%
+%%	usage: \autoFigure{position}{label}{content}{caption}
+%% ------------------------------------------------------------------
+\newcommand{\autoFigure}[4]{
+	\begin{figure}[#1]
+		\centering
+		#3
+		\caption{#4}
+		\label{fig:#2}
+	\end{figure}}

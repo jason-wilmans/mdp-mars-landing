@@ -1,3 +1,4 @@
+#MATLAB
 precompile/
 .autosave
 _jitprj/
@@ -5,3 +6,7 @@ EMLReport/
 _self/
 autosave
 *.autosave
+
+# LaTeX
+*.aux
+writing/MD_JTW.pdf
