@@ -122,8 +122,6 @@ namespace Evaluation
             //_outputService.WriteEvaulationData(TestSeries);
             AtmosphereModel = _diamgramService.PrepareAtmosphereDiagram(0.1921);
             _outputService.WritePdf(AtmosphereModel, "nasa");
-            AtmosphereModel = _diamgramService.PrepareAtmosphereDiagram(0.15);
-            _outputService.WritePdf(AtmosphereModel, "custom");
         }
 
         private void UpdateModel()

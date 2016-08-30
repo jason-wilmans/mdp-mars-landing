@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Navigation;
+﻿using System.Linq;
 
 namespace Evaluation
 {
@@ -55,7 +53,7 @@ namespace Evaluation
         {
             if (LastHeight <= 0.2)
             {
-                return LastSpeed <= 1.0 ? "Soft Landing" : "Crash";
+                return LastSpeed <= 1.0 ? "Landing" : "Crash";
             }
 
             return "Parachute";
