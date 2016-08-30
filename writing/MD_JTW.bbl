@@ -8,6 +8,19 @@
 {Aerojet Rocketdyne}. 2016.
 \newblock {\em {Thruster Strengths}}.
 
+\bibitem[\protect\citename{Blanchard \& Walberg, }1980]{Blanchard1980}
+Blanchard, Robert~C, \& Walberg, Gerald~D. 1980.
+\newblock {Determination of the Hypersonic-Continnum/Rarefied-Flow Drag
+  Coefficient of the Viking Lander Capsule 1 Aeroshell from Flight Data}.
+\newblock {\em NASA TM 1793}.
+
+\bibitem[\protect\citename{Edquist {\em et~al.}, }2009]{Edquist2009}
+Edquist, Karl~T, Dyakonov, Artem~a, Wrightz, Michael~J., \& Tangx, Chun~Y.
+  2009.
+\newblock {Aerothermodynamic Design of the Mars Science Laboratory Backshell
+  and Parachute Cone}.
+\newblock {\em 41st AIAA Thermophysics Conference}, {\bf 4078}, 1--14.
+
 \bibitem[\protect\citename{Hall, }2015]{Hall2015}
 Hall, Nancy. 2015.
 \newblock {\em {Mars Atmosphere Model (Metric Units)}}.
@@ -16,8 +29,36 @@ Hall, Nancy. 2015.
 NASA. 2016.
 \newblock {\em {Mars Facts}}.
 
+\bibitem[\protect\citename{NASA/JPL, }2009]{NASA/JPL2009}
+NASA/JPL. 2009.
+\newblock {\em {Mars Science Laboratory Parachute Qualification Testing}}.
+
+\bibitem[\protect\citename{Theisinger \& Braun, }2009]{Theisinger2009}
+Theisinger, John~E., \& Braun, Robert~D. 2009.
+\newblock {Multi-Objective Hypersonic Entry Aeroshell Shape Optimization}.
+\newblock {\em Journal of Spacecraft and Rockets}, {\bf 46}(5), 957--966.
+
+\bibitem[\protect\citename{Way {\em et~al.}, }2007]{Way2007}
+Way, David~W., Powell, Richard~W., Chen, Allen, Steltzner, Adam~D., Martin, A.
+  Miguel~San, Burkhart, P.~Daniel, \& Mendeck, Gavin~F. 2007.
+\newblock {Mars science laboratory: Entry, descent, and landing system
+  performance}.
+\newblock {\em IEEE Aerospace Conference Proceedings},  1--39.
+
+\bibitem[\protect\citename{Wells, }2000]{Wells2000}
+Wells, Grant. 2000.
+\newblock {Mars Entry, Descent and Landing Parametric Trades}.
+
 \bibitem[\protect\citename{Wikipedia, }2016]{Wikipedia2016b}
 Wikipedia. 2016.
 \newblock {\em {Mars Science Laboratory}}.
+
+\bibitem[\protect\citename{Yamada {\em et~al.}, }2009]{Yamada2009}
+Yamada, Kazuhiko, Kimura, Yusuke, Akita, Daisuke, Abe, Takashi, Suzuki, Kojiro,
+  Imamura, Osamu, Koyama, Masashi, \& Hayashi, A.Koichi. 2009.
+\newblock {Study on Low-ballistic-coefficient Atmospheric-entry Technology
+  Using Flexible Aeroshell}.
+\newblock {\em Transactions of the Japan Society for Aeronautical and Space
+  Sciences, Space Technology Japan}, {\bf 7}(ists26), Pg{\_}1--Pg{\_}7.
 
 \end{thebibliography}
