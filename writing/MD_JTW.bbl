@@ -1,7 +1,19 @@
 \begin{thebibliography}{}
 
-\bibitem[\protect\citename{Wikipediab, }2016]{Wikipedia2016b}
-Wikipediab. 2016.
+\bibitem[\protect\citename{{Aerojet Rocketdyne}, }n.d.]{AerojetRocketdyne}
+{Aerojet Rocketdyne}.
+\newblock {\em {Thruster Strengths}}.
+
+\bibitem[\protect\citename{{Aerojet Rocketdyne}, }2012]{AerojetRocketdyne2012}
+{Aerojet Rocketdyne}. 2012.
+\newblock {\em {Thruster Selection}}.
+
+\bibitem[\protect\citename{NASA, }2016]{NASA2016}
+NASA. 2016.
+\newblock {\em {Mars Facts}}.
+
+\bibitem[\protect\citename{Wikipedia, }2016]{Wikipedia2016b}
+Wikipedia. 2016.
 \newblock {\em {Mars Science Laboratory}}.
 
 \end{thebibliography}

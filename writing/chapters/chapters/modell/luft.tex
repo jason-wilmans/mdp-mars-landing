@@ -1,0 +1,14 @@
+Der komplexeste Teil des Modells beschreibt die Interaktion mit der Atmosphäre. Es werden zwei resultierende Kräfte berechnet. Die erste ist der Luftwiderstand, dem die Kapsel immer ausgesetzt ist. Zusätzlich kann, je nach Form und Angriffswinkel, dynamischer Auftrieb erzeugt werden. Die Berechnung beider Kräfte basiert auf einem Atmosphärenmodell, dass den Luftdruck in Abhängigkeit von der Höhe annähert. Ebenfalls großen Einfluss (und im Sinne der Fragestellung hoch relevant) haben die Flugparameter, die sich je nach Flugphase stark ändern können.
+
+\paragraph{Kräfte}
+Auf die detaillierte Berechnung der Strömungsarten wurde auf Grund der schlechten Quellenlage und der praktisch unendlich steigerbaren Komplexität des Themas verzichtet. Die zugrunde liegende Komplexität drückt sich allerdings abgeschwächt in den dynamischen Parametern aus. Die Berechnung der tatsächlich entstehenden Kräfte verhält sich analog zu den bisher betrachteten Teilsystemen. Es gelten die allgemeinen Gleichungen für Luftwiderstand
+$$F_W = c_W \cdot \frac{p}{2} \cdot v^_{2} \cdot A $$
+und Auftrieb:
+$$F_A = c_A \cdot \frac{p}{2} \cdot v^_{2} \cdot A $$
+
+Die korrespondierenden Beschleunigungsvektoren $\vec a_W$ und $\vec a_A$ berechnen sich
+
+		NASA Atmosphärenmodell (Anpassungen, Singularität!)
+			Luftwiderstand
+			Auftriebskraft
+		dynamische Parameter
