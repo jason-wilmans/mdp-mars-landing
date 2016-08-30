@@ -86,8 +86,8 @@ namespace Evaluation
                 RowCoordinates = speeds,
                 Data = accelerationTable,
                 ContourLevels = contours.Select(c => c.Limit).ToArray(),
-                ContourColors = contours.Select(c => c.Color).ToArray()
-                //LabelFormatString = this.FormatString
+                ContourColors = contours.Select(c => c.Color).ToArray(),
+                LabelFormatString = "F1"
                 
             };
             cs.CalculateContours();
