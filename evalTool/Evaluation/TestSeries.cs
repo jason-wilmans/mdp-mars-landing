@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Navigation;
 
 namespace Evaluation
 {
-    class TestSeries<T>
+    class TestSeries
     {
         public double LiftToDragCoefficient { get; }
 
@@ -12,7 +14,10 @@ namespace Evaluation
 
         public double TimeResolution { get; set; }
 
-        private IList<T> _data;
+        public DataSeries Acceleration { get; set; }
+        public DataSeries AirSpeed { get; set; }
+        public DataSeries Position { get; set; }
+        public DataSeries Speed { get; set; }
 
         public TestSeries(double liftToDragCoefficient, double entryAngle, int entrySpeed, double timeResolution)
         {
@@ -22,9 +27,43 @@ namespace Evaluation
             TimeResolution = timeResolution;
         }
 
-        public void AddDataPoint(T point)
+        public double TotalTime => Acceleration.Count*TimeResolution;
+
+        /// <summary>
+        /// in km
+        /// </summary>
+        public double HorizontalDistance => LastDistance() / 1000;
+        
+        /// <summary>
+        /// in Gs
+        /// </summary>
+        public double MaxAccleration => Acceleration.EnumerateAll().Max();
+
+        /// <summary>
+        /// m/s
+        /// </summary>
+        public double LastSpeed => AirSpeed.EnumerateAll().Last();
+
+        /// <summary>
+        /// m
+        /// </summary>
+        public double LastHeight => Position.EnumerateOdd().Last();
+
+        public string Turnout => CalculateTurnout();
+
+        private string CalculateTurnout()
         {
-            _data.Add(point);
+            if (LastHeight <= 0.05)
+            {
+                return LastSpeed <= 1.0 ? "Soft Landing" : "Crash";
+            }
+
+            return "Parachute";
+        }
+
+        private double LastDistance()
+        {
+            return Position.EnumerateEven().Last();
         }
     }
 }

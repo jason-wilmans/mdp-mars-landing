@@ -4,9 +4,30 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Evaluation"
+        xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWinvalueow" Height="350" Width="525">
+    <Window.DataContext>
+        <local:SeriesOverviewViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding AvailableLDRatios}" SelectedValue="{Binding SelectedLD}"/>
+        <ComboBox x:Name="comboBox2" HorizontalAlignment="Left" Margin="135,36,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding AvailableAngles}"  SelectedValue="{Binding SelectedAngle}"/>
+        <ComboBox x:Name="comboBox3" HorizontalAlignment="Left" Margin="260,36,0,0" VerticalAlignment="Top" Width="120" ItemsSource="{Binding AvailableSpeeds}"  SelectedValue="{Binding SelectedSpeed}"/>
+        <Label x:Name="label" Content="L/D" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy" Content="°" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label_Copy1" Content="m/s" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Summary" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dataGrid1" ItemsSource="{Binding CurrentSeries}" Margin="10,94,10,0" VerticalAlignment="Top" Height="64" />
+
+
+        <TabControl x:Name="tabControl" Margin="10,163,10,10">
+            <TabItem Header="Trajectory">
+                <oxy:PlotView Model="{Binding TrajectoryModel}" />
+            </TabItem>
+            <TabItem Header="Acceleration">
+                <oxy:PlotView Model="{Binding AccelerationModel}" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

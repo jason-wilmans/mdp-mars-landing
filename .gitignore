@@ -17,3 +17,25 @@ experiment2/slprj/sim/_sharedutils/shared_file.dmr
 *.aux
 writing/MD_JTW.pdf
 
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+[Oo]bj/
+*.dll
+*.exe
+*.pdb
+*.svd
+*.userprefs
+*.pidb
+*.suo
+*.user
+*.unityproj
+*.booproj
+**/bin/
+**/TestResults/
+
+#Simulation results
+**/results/raw/
+**results/evaluated/
+results/evaluated/
