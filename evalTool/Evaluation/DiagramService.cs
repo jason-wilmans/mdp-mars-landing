@@ -4,8 +4,10 @@
 // // without the prior written consent of the copyright owner.
 // // </copyright>
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -110,7 +112,7 @@ namespace Evaluation
 
         private double[,] CalculateAccelerationTable(double ld, double[] angles, double[] speeds, IEnumerable<TestSeries> testSeries)
         {
-            double[,] table = new double[speeds.Length, angles.Length];
+            double[,] table = new double[angles.Length, speeds.Length];
 
             for (int angle = 0; angle < angles.Length; angle++)
             {
@@ -125,6 +127,64 @@ namespace Evaluation
             }
 
             return table;
+        }
+
+        public PlotModel PrepareAtmosphereDiagram(double R)
+        {
+            // Create the plot model
+            var model = new PlotModel
+            {
+                Title = "Dichte",
+                Axes =
+                {
+                    new LinearAxis {Position = AxisPosition.Bottom, Title = "Height (m)", Minimum = 0, Maximum = 125000},
+                    new LinearAxis {Position = AxisPosition.Left, Title = "Dichte (kg/m³)", Minimum = -0.01, Maximum = 0.02}
+                }
+            };
+
+            var series1 = new LineSeries
+            {
+                Color = OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff),
+                StrokeThickness = 0.5,
+                MarkerStrokeThickness = 1.0,
+                LineStyle = LineStyle.Solid
+            };
+
+            IList<DataPoint> points = PlotFunction(125000, 10, R);
+            series1.Points.AddRange(points);
+
+            model.Series.Add(series1);
+            return model;
+        }
+
+        private IList<DataPoint> PlotFunction(double maxValue, double stepSize, double R)
+        {
+            IList<DataPoint> points = new List<DataPoint>();
+            double x = 0;
+            while (x <= maxValue)
+            {
+                points.Add(new DataPoint(x, AthmosphereModel(x, R)));
+                x += stepSize;
+            }
+
+            return points;
+        }
+
+        private double AthmosphereModel(double height, double R)
+        {
+            var p = 0.699 * Math.Exp(-0.00009 * height);
+            double T;
+            if (height > 7000)
+            {
+                T = -23.4 - 0.00222 * height;
+            }
+            else
+            {
+                T = -31 - 0.000998 * height;
+            }
+
+            //return p/(0.1921 *(T + 273.1) );
+            return p / (R * (T + 273.1));
         }
     }
 

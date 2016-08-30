@@ -89,6 +89,8 @@ namespace Evaluation
             }
         }
 
+        public PlotModel AtmosphereModel { get; set; }
+
         private readonly SeriesParser _seriesParser;
         private double _selectedLd;
         private double _selectedAngle;
@@ -118,8 +120,12 @@ namespace Evaluation
             AvailableSpeeds = new ObservableCollection<int>(readSeries.Select(s => s.EntrySpeed).Distinct().ToList());
             _outputService = new OutputService(OutputFolder, _diamgramService);
             //_outputService.WriteEvaulationData(TestSeries);
+            AtmosphereModel = _diamgramService.PrepareAtmosphereDiagram(0.1921);
+            _outputService.WritePdf(AtmosphereModel, "nasa");
+            AtmosphereModel = _diamgramService.PrepareAtmosphereDiagram(0.15);
+            _outputService.WritePdf(AtmosphereModel, "custom");
         }
-        
+
         private void UpdateModel()
         {
             TrajectoryModel = _diamgramService.PrepareTrajectoryDiagram(CurrentSeries[0]);

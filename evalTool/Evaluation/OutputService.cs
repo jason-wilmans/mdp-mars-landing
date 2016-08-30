@@ -91,5 +91,14 @@ namespace Evaluation
         {
             return _outputFolder + testSeries.ToString(CultureInfo.InvariantCulture) + "\\";
         }
+        
+        public void WritePdf(PlotModel model, string fileName)
+        {
+            using (var stream = File.Create(fileName + ".pdf"))
+            {
+                var pdfExporter = new PdfExporter { Width = 700, Height = 400 };
+                pdfExporter.Export(model, stream);
+            }
+        }
     }
 }

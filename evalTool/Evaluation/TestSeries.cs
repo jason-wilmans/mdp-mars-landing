@@ -47,13 +47,13 @@ namespace Evaluation
         /// <summary>
         /// m
         /// </summary>
-        public double LastHeight => Position.EnumerateOdd().Last();
+        public double LastHeight => Position.EnumerateEven().Last();
 
         public string Turnout => CalculateTurnout();
 
         private string CalculateTurnout()
         {
-            if (LastHeight <= 0.05)
+            if (LastHeight <= 0.2)
             {
                 return LastSpeed <= 1.0 ? "Soft Landing" : "Crash";
             }
@@ -63,7 +63,7 @@ namespace Evaluation
 
         private double LastDistance()
         {
-            return Position.EnumerateEven().Last();
+            return Position.EnumerateOdd().Last();
         }
     }
 }
