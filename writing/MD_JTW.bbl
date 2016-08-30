@@ -1,12 +1,16 @@
 \begin{thebibliography}{}
 
-\bibitem[\protect\citename{{Aerojet Rocketdyne}, }n.d.]{AerojetRocketdyne}
-{Aerojet Rocketdyne}.
-\newblock {\em {Thruster Strengths}}.
-
 \bibitem[\protect\citename{{Aerojet Rocketdyne}, }2012]{AerojetRocketdyne2012}
 {Aerojet Rocketdyne}. 2012.
 \newblock {\em {Thruster Selection}}.
+
+\bibitem[\protect\citename{{Aerojet Rocketdyne}, }2016]{AerojetRocketdyne}
+{Aerojet Rocketdyne}. 2016.
+\newblock {\em {Thruster Strengths}}.
+
+\bibitem[\protect\citename{Hall, }2015]{Hall2015}
+Hall, Nancy. 2015.
+\newblock {\em {Mars Atmosphere Model (Metric Units)}}.
 
 \bibitem[\protect\citename{NASA, }2016]{NASA2016}
 NASA. 2016.
