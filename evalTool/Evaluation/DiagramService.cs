@@ -69,34 +69,41 @@ namespace Evaluation
                 Title = "Maximale Beschleunigung",
                 Axes =
                 {
-                    new LinearAxis {Position = AxisPosition.Left, Title = "Speed (m/s)", Minimum = 0, Maximum = 9000},
-                    new LinearAxis {Position = AxisPosition.Bottom, Title = "Angle (°)", Minimum = 0, Maximum = 30}
+                    new LinearAxis {Position = AxisPosition.Left, Title = "Speed (m/s)", Minimum = 4000, Maximum = 9000},
+                    new LinearAxis {Position = AxisPosition.Bottom, Title = "Angle (°)", Minimum = 10, Maximum = 20}
                 }
             };
-            var angles = testSeries.Where(s => s.LiftToDragCoefficient == ld).Select(s => s.EntryAngle).Distinct().ToArray();
+            var angles = testSeries.Where(s => s.LiftToDragCoefficient == ld).Select(s => -s.EntryAngle).Distinct().ToArray();
             var speeds = testSeries.Where(s => s.LiftToDragCoefficient == ld).Select(s => (double)s.EntrySpeed).Distinct().ToArray();
-            var max = testSeries.Where(s => s.LiftToDragCoefficient == ld).Min(s => s.MaxAccleration);
+            var max = testSeries.Where(s => s.LiftToDragCoefficient == ld).Max(s => s.MaxAccleration);
+            var accelerationTable = CalculateAccelerationTable(ld, angles, speeds, testSeries);
+            var minColor = OxyColor.FromArgb(0xff, 0xff, 0xff, 0xff);
+            var maxColor = OxyColor.FromArgb(0xff, 0xff, 0x00, 0x00);
+            var contours = GenerateContours(0.0, max, minColor, maxColor, 20);
             var cs = new ContourSeries
             {
                 ColumnCoordinates = angles,
                 RowCoordinates = speeds,
-                Data = CalculateAccelerationTable(ld, angles, speeds, testSeries),
-                ContourLevels = GenerateContours(0.0, max, 10),
+                Data = accelerationTable,
+                ContourLevels = contours.Select(c => c.Limit).ToArray(),
+                ContourColors = contours.Select(c => c.Color).ToArray()
                 //LabelFormatString = this.FormatString
+                
             };
             cs.CalculateContours();
             m.Series.Add(cs);
             return m;
         }
 
-        private double[] GenerateContours(double min, double max, int nrOfContours)
+        private Contour[] GenerateContours(double min, double max, OxyColor minColor, OxyColor maxColor, int nrOfContours)
         {
             double delta = max - min;
             double stepSize = delta / nrOfContours;
-            double[] contours = new double[nrOfContours];
+            double colorStepSize = 1/(double)nrOfContours;
+            var contours = new Contour[nrOfContours];
             for (int i = 1; i <= nrOfContours; i++)
             {
-                contours[i - 1] = min + i * stepSize;
+                contours[i - 1] = new Contour(min + i * stepSize, OxyColor.Interpolate(minColor, maxColor, i * colorStepSize));
             }
             return contours;
         }
@@ -112,12 +119,24 @@ namespace Evaluation
                     table[angle, speed] =
                         testSeries.Where(
                             s =>
-                                s.LiftToDragCoefficient == ld && s.EntryAngle == angles[angle] &&
+                                s.LiftToDragCoefficient == ld && s.EntryAngle == -angles[angle] &&
                                 s.EntrySpeed == speeds[speed]).Select(s => s.MaxAccleration).Single();
                 }
             }
 
             return table;
+        }
+    }
+
+    internal struct Contour
+    {
+        public double Limit;
+        public OxyColor Color;
+
+        public Contour(double limit, OxyColor color)
+        {
+            Limit = limit;
+            Color = color;
         }
     }
 }

@@ -117,7 +117,7 @@ namespace Evaluation
             AvailableAngles = new ObservableCollection<double>(readSeries.Select(s => s.EntryAngle).Distinct().ToList());
             AvailableSpeeds = new ObservableCollection<int>(readSeries.Select(s => s.EntrySpeed).Distinct().ToList());
             _outputService = new OutputService(OutputFolder, _diamgramService);
-            _outputService.WriteEvaulationData(TestSeries);
+            //_outputService.WriteEvaulationData(TestSeries);
         }
         
         private void UpdateModel()
