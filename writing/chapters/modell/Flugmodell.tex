@@ -1,0 +1,22 @@
+\paragraph{Flugmodell}
+Das Flugmodell berechnet die tatsächliche Physik des Fluges. Es besteht aus vier Teilsystemen, welche nun im Detail vorgestellt werden: Transform, Schwerkraft, Luftwiderstand und Antrieb. \\ \\
+
+Das Transform hat seinen Namen in Anlehnung an viele Vektor-Bibliotheken in der Informatik. Es verwaltet die drei Orientierungsvariablen Geschwindigkeit, Position und Rotation. Das System hat als Parameter den aktuellen Beschleunigungsvektor. Die Beschleunigung entspricht der Summe der Einzelbeschleunigungen der anderen vier Blöcke. Die Geschwindigkeit ist das Integral der Beschleunigung, die Position integriert entsprechend die Geschwindigkeit.
+
+Die Rotation hingegen ist nicht als unabhängige dynamische Größe modelliert. Sie wird als ideal gesteuert, i.e. immer der aktuellen Tangente des Flugtrajektors entgegengesetzt, angenommen. Entsprechend wird die Rotation als ein Vektor $\vec r$ dynamisch aus dem Geschwindigkeitsvektor $\vec v$ berechnet als $\vec r = -\frac{\vec v}{|\vec v|}$.\\ \\
+
+Die Gravitation berechnet sich entsprechend der allgemeinen Formel für die Gravitationskraft.
+$$F = G \frac{m_1 \cdot m_2}{r^{2}} $$
+Sie berücksichtigt die Masse des Mars $m_M = 5.9724 \cdot 10^{24}$kg \cite{NASA2016}, die Masse der Landekapsel $m_K = 2401$kg \cite{Wikipedia2016b} und die dynamische Masse des Treibstoffs $m_T$, die zwischen 0 und 390 kg \cite{Wikipedia2016b} liegen kann. Mit $F = m \cdot a$ berechnet sich der Beschleunigungsvektors $\vec a_G$ wie folgt.
+$$\vec a_G = G \frac{m_M \cdot (m_K + m_T)}{r^{2}} \cdot \frac{1}{m_K + m_T} \cdot \left(\begin{array}{c} 0 \\ -1 \end{array}\right)$$\\
+
+Weitere Beschleunigung erfährt die Kapsel potentiell durch das Antriebssystem. Antriebssysteme definieren sich direkt durch ihre Schubkraft $F_T$. Diese ist laut Herstellerangaben zusammengerechnet 24.8
+
+	Luftwiderstand
+		NASA Atmosphärenmodell (Anpassungen, Singularität!)
+			Luftwiderstand
+			Auftriebskraft
+		dynamische Parameter
+Antrieb
+	Trägheitssimulation
+	Treibstoffverbrauch
