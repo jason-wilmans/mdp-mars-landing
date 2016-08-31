@@ -16,36 +16,24 @@ namespace Evaluation
 {
     class DiagramService
     {
+        public PlotModel PrepareSpeedHeightDiagram(TestSeries testSeries)
+        {
+            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Geschwindigkeit (km/s)", Minimum = 0, Maximum = 8.5 };
+            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Höhe (km)", Minimum = 0, Maximum = 125 };
+            var xAxis = testSeries.AirSpeed.EnumerateAll().Select(s => s / 1000);
+            var yAxis = testSeries.Position.EnumerateEven().Select(s => s / 1000);
+            var dataPoints = CreateDataPoints(xAxis, yAxis);
+            return PrepareLineChart("Höhe/Geschwindigkeit", dataPoints, bottom, left, OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff));
+        }
+
         public PlotModel PrepareTrajectoryDiagram(TestSeries testSeries)
         {
-            // Create the plot model
-            var model = new PlotModel
-            {
-                Title = "Trajectory",
-                Axes =
-                {
-                    new LinearAxis {Position = AxisPosition.Left, Title = "Height (km)", Minimum = 0, Maximum = 125},
-                    new LinearAxis {Position = AxisPosition.Bottom, Title = "Distance (km)", Minimum = 0, Maximum = 1000}
-                }
-            };
-
-            var series1 = new LineSeries
-            {
-                Color = OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff),
-                StrokeThickness = 1.0,
-                LineStyle = LineStyle.Solid,
-                MarkerType = MarkerType.Circle
-            };
-
-            List<DataPoint> points = CreateDataPoints(
-                testSeries.Position.EnumerateOdd(),
-                testSeries.Position.EnumerateEven(), 0.001, 0.001
-                );
-            series1.Points.AddRange(points);
-
-
-            model.Series.Add(series1);
-            return model;
+            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Horizontale Distanz (km)", Minimum = 0, Maximum = 1000 };
+            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Höhe (km)", Minimum = 0, Maximum = 125 };
+            var xAxis = testSeries.Position.EnumerateOdd().Select(s => s / 1000);
+            var yAxis = testSeries.Position.EnumerateEven().Select(s => s / 1000);
+            var dataPoints = CreateDataPoints(xAxis, yAxis);
+            return PrepareLineChart("Trajektor", dataPoints, bottom, left, OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff));
         }
 
         private List<DataPoint> CreateDataPoints(
@@ -184,6 +172,32 @@ namespace Evaluation
             }
 
             return p / (R * (T + 273.1));
+        }
+
+        public PlotModel PrepareLineChart(string title, List<DataPoint> points, Axis bottom, Axis left, OxyColor lineColor)
+        {
+            var model = new PlotModel
+            {
+                Title = title,
+                Axes =
+                {
+                    bottom,
+                    left
+                }
+            };
+
+            var series1 = new LineSeries
+            {
+                Color = lineColor,
+                StrokeThickness = 1.0,
+                LineStyle = LineStyle.Solid,
+                MarkerType = MarkerType.Circle
+            };
+
+            series1.Points.AddRange(points);
+
+            model.Series.Add(series1);
+            return model;
         }
     }
 

@@ -3,7 +3,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using OxyPlot;
-using OxyPlot.Series;
 
 namespace Evaluation
 {
@@ -18,7 +17,7 @@ namespace Evaluation
             this._diagramService = _diagramService;
         }
 
-        public void WriteEvaulationData(IList<TestSeries> testSeries)
+        public void WriteAcclerationGraphs(IList<TestSeries> testSeries)
         {
             var path = _outputFolder;
             if (Directory.Exists(path))
@@ -27,13 +26,7 @@ namespace Evaluation
             }
 
             Directory.CreateDirectory(path);
-
-            foreach (var series in testSeries)
-            {
-                string seriesPath = EnsurePathExists(series);
-                OutputTrajectory(series, seriesPath);
-            }
-
+            
             foreach (var ld in testSeries.Select(s => s.LiftToDragCoefficient).Distinct())
             {
                 OutputAccelerationGraphFor(ld, testSeries);
@@ -42,13 +35,11 @@ namespace Evaluation
 
         private void OutputAccelerationGraphFor(double ld, IList<TestSeries> testSeries)
         {
+            var ldFolderPath = GetLdFolderPath(ld);
+            EnsureFolderExists(ldFolderPath);
             var model = _diagramService.PrepareAccelerationGraphFor(ld, testSeries);
-
-            using (var stream = File.Create(GetLdFolderPath(ld) + "acceleration.pdf"))
-            {
-                var pdfExporter = new PdfExporter { Width = 700, Height = 400 };
-                pdfExporter.Export(model, stream);
-            }
+            
+            WritePdf(model, ldFolderPath + "acceleration.pdf");
         }
 
 
@@ -56,40 +47,36 @@ namespace Evaluation
         {
             var model = _diagramService.PrepareTrajectoryDiagram(series);
 
-            using (var stream = File.Create(seriesPath + "trajectory.pdf"))
-            {
-                var pdfExporter = new PdfExporter {Width = 700, Height = 400};
-                pdfExporter.Export(model, stream);
-            }
+            WritePdf(model, seriesPath + "trajectory.pdf");
         }
 
-        private string EnsurePathExists(TestSeries testSeries)
+
+
+        private string EnsureFolderExists(TestSeries testSeries)
         {
             string folder = GetLdFolderPath(testSeries.LiftToDragCoefficient);
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
+            EnsureFolderExists(folder);
 
             folder += testSeries.EntryAngle.ToString(CultureInfo.InvariantCulture) + "\\";
-
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
+            EnsureFolderExists(folder);
 
             folder += testSeries.EntrySpeed + "\\";
-            if (!Directory.Exists(folder))
-            {
-                Directory.CreateDirectory(folder);
-            }
+            EnsureFolderExists(folder);
 
             return folder;
         }
 
-        private string GetLdFolderPath(double testSeries)
+        private void EnsureFolderExists(string path)
         {
-            return _outputFolder + testSeries.ToString(CultureInfo.InvariantCulture) + "\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+        }
+
+        private string GetLdFolderPath(double ld)
+        {
+            return _outputFolder + ld.ToString("F2") + "\\";
         }
         
         public void WritePdf(PlotModel model, string fileName)

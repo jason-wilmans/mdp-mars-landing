@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 
 namespace Evaluation
 {
@@ -46,7 +44,6 @@ namespace Evaluation
             series.Throttle = ParseData(seriesPath + "\\" + "throttle.out");
             series.Thrust = ParseData(seriesPath + "\\" + "thrust.out");
             series.Fuel = ParseData(seriesPath + "\\" + "fuel.out");
-
 
             return series;
         }

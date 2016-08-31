@@ -91,6 +91,16 @@ namespace Evaluation
             }
         }
 
+        public PlotModel SpeedHeightModel
+        {
+            get { return _speedHeightModel; }
+            set
+            {
+                _speedHeightModel = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public PlotModel AtmosphereModel { get; set; }
 
         private readonly SeriesParser _seriesParser;
@@ -102,31 +112,34 @@ namespace Evaluation
         private DiagramService _diamgramService;
         private readonly OutputService _outputService;
         private PlotModel _accelerationModel;
+        private PlotModel _speedHeightModel;
 
 
         public SeriesOverviewViewModel()
         {
-            DetermineFolders();
+            if (App.Current.MainWindow != null)
+            {
+                DetermineFolders();
 
-            _diamgramService = new DiagramService();
-            _seriesParser = new SeriesParser();
-            var readSeries = UpdateSeries();
+                _diamgramService = new DiagramService();
+                _seriesParser = new SeriesParser();
+                var readSeries = UpdateSeries();
 
-            _selectedLd = readSeries[0].LiftToDragCoefficient;
-            _selectedAngle = readSeries[0].EntryAngle;
-            _selectedSpeed = readSeries[0].EntrySpeed;
-            CurrentSeries = new ObservableCollection<TestSeries>();
-            UpdateSelectedSeries();
-            UpdateAccelerationGraph();
+                AtmosphereModel = _diamgramService.PrepareAtmosphereDiagram(0.1921);
 
-            AvailableLDRatios = new ObservableCollection<double>(readSeries.Select(s => s.LiftToDragCoefficient).Distinct().ToList());
-            AvailableAngles = new ObservableCollection<double>(readSeries.Select(s => s.EntryAngle).Distinct().ToList());
-            AvailableSpeeds = new ObservableCollection<int>(readSeries.Select(s => s.EntrySpeed).Distinct().ToList());
-            _outputService = new OutputService(OutputFolder, _diamgramService);
-            //_outputService.WriteEvaulationData(TestSeries);
+                _selectedLd = readSeries[0].LiftToDragCoefficient;
+                _selectedAngle = readSeries[0].EntryAngle;
+                _selectedSpeed = readSeries[0].EntrySpeed;
+                CurrentSeries = new ObservableCollection<TestSeries>();
+                UpdateSelectedSeries();
+                UpdateAccelerationGraph();
 
-            AtmosphereModel = _diamgramService.PrepareAtmosphereDiagram(0.1921);
-            _outputService.WritePdf(AtmosphereModel, "nasa");
+                AvailableLDRatios = new ObservableCollection<double>(readSeries.Select(s => s.LiftToDragCoefficient).Distinct().ToList());
+                AvailableAngles = new ObservableCollection<double>(readSeries.Select(s => s.EntryAngle).Distinct().ToList());
+                AvailableSpeeds = new ObservableCollection<int>(readSeries.Select(s => s.EntrySpeed).Distinct().ToList());
+                _outputService = new OutputService(OutputFolder, _diamgramService);
+                //_outputService.WriteAcclerationGraphs(TestSeries);
+            }
         }
 
         private void DetermineFolders()
@@ -147,9 +160,10 @@ namespace Evaluation
             }
         }
 
-        private void UpdateModel()
+        private void UpdateModels()
         {
             TrajectoryModel = _diamgramService.PrepareTrajectoryDiagram(CurrentSeries[0]);
+            SpeedHeightModel = _diamgramService.PrepareSpeedHeightDiagram(CurrentSeries[0]);
         }
 
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)
@@ -171,8 +185,7 @@ namespace Evaluation
                 CurrentSeries.Add(series);
             }
 
-
-            UpdateModel();
+            UpdateModels();
         }
         private IList<TestSeries> UpdateSeries()
         {

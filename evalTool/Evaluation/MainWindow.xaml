@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Evaluation"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="MainWinvalueow" Height="350" Width="525">
+        Title="EvalTool" Height="350" Width="525">
     <Window.DataContext>
         <local:SeriesOverviewViewModel/>
     </Window.DataContext>
@@ -24,6 +24,9 @@
         <TabControl x:Name="tabControl" Margin="10,163,10,10">
             <TabItem Header="Trajectory">
                 <oxy:PlotView Model="{Binding TrajectoryModel}" />
+            </TabItem>
+            <TabItem Header="Speed/Height">
+                <oxy:PlotView Model="{Binding SpeedHeightModel}" />
             </TabItem>
             <TabItem Header="Acceleration">
                 <oxy:PlotView Model="{Binding AccelerationModel}" />
