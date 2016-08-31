@@ -1,6 +1,6 @@
 addpath('helpers/');
 
-outputFolder = '../results/verification/raw/';
+outputFolder = '../verification/raw/';
 resetFolder(outputFolder);
 
 % iterate all values for L/D(l), entry entry angle(a) and entry speed(v),
@@ -26,14 +26,15 @@ tank = initConstant(390);
 disp('Starting sim');
 sim('Landing');
 
-dump(speedFolder, 'machSpeed.out', density);
+dump(speedFolder, 'machSpeed.out', machSpeed);
 dump(speedFolder, 'speed.out', speed);
 dump(speedFolder, 'airSpeed.out', airSpeed);
 dump(speedFolder, 'position.out', position);
 dump(speedFolder, 'acceleration.out', acceleration);
 dump(speedFolder, 'density.out', density);
+dump(speedFolder, 'temperature.out', temperature);
 dump(speedFolder, 'throttle.out', throttle);
 dump(speedFolder, 'thrust.out', thrust);
-dump(speedFolder, 'fuel.out', density);
+dump(speedFolder, 'fuel.out', fuel);
 
 disp('done');

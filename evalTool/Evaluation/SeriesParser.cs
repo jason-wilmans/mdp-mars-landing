@@ -14,14 +14,7 @@ namespace Evaluation
             var parsed = new List<TestSeries>();
             foreach (var series in seriesFolder)
             {
-                try
-                {
-                    parsed.Add(ParseSeriesFolder(series));
-                }
-                catch (Exception)
-                {
-                    break;
-                }
+                parsed.Add(ParseSeriesFolder(series));
             }
 
             return parsed;
@@ -38,6 +31,7 @@ namespace Evaluation
             series.MachSpeed = ParseData(seriesPath + "\\" + "machSpeed.out");
             series.Speed = ParseData(seriesPath + "\\" + "speed.out", true);
             series.AirSpeed = ParseData(seriesPath + "\\" + "airSpeed.out");
+            series.Temperature = ParseData(seriesPath + "\\" + "temperature.out");
             series.Position = ParseData(seriesPath + "\\" + "position.out", true);
             series.Acceleration = ParseData(seriesPath + "\\" + "acceleration.out");
             series.Density = ParseData(seriesPath + "\\" + "density.out");
@@ -48,25 +42,36 @@ namespace Evaluation
             return series;
         }
 
-        private DataSeries ParseData(string dataFile, bool isVector = false)
+        private DataSeries ParseData(string dataFile, bool isVector = false, double precision = 1.0)
         {
             if (!File.Exists(dataFile)) return null;
             DataSeries data = new DataSeries(isVector);
             using (var stream = new StreamReader(dataFile))
             {
-                
+                int row = 1;
                 while (!stream.EndOfStream)
                 {
                     string line = stream.ReadLine();
                     if (!string.IsNullOrWhiteSpace(line))
                     {
-                        double d = double.Parse(line.Trim(), CultureInfo.InvariantCulture);
-                        data.Add(d);
+                        try
+                        {
+                            //double d = precision * double.Parse(line.Trim(),
+                            //     NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign | NumberStyles.AllowTrailingSign | NumberStyles.AllowDecimalPoint | Nu);
+                            double d = precision * double.Parse(line.Trim(), CultureInfo.InvariantCulture);
+                            data.Add(d);
+                        }
+                        catch (Exception e)
+                        {
+                            throw;
+                        }
+                        
                     }
+                    row++;
                 }
             }
 
-            if(isVector && data.Count % 2 != 0) throw new FileFormatException(new Uri(dataFile));
+            if (isVector && data.Count % 2 != 0) throw new FileFormatException(new Uri(dataFile));
             return data;
         }
 

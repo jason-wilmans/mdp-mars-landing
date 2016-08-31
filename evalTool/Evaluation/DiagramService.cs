@@ -7,7 +7,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
@@ -34,6 +33,16 @@ namespace Evaluation
             var yAxis = testSeries.Position.EnumerateEven().Select(s => s / 1000);
             var dataPoints = CreateDataPoints(xAxis, yAxis);
             return PrepareLineChart("Trajektor", dataPoints, bottom, left, OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff));
+        }
+
+        public PlotModel PrepareDensityChart(TestSeries testSeries)
+        {
+            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Zeit (s)", Minimum = 0, Maximum = testSeries.LastTimeStamp };
+            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Druck (kg/m³)", Minimum = 0, Maximum = 0.02 };
+            var xAxis = testSeries.EnumerateTimeValues();
+            var yAxis = testSeries.Density.EnumerateAll();
+            var dataPoints = CreateDataPoints(xAxis, yAxis);
+            return PrepareLineChart("Atmosphärendruck", dataPoints, bottom, left, OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff));
         }
 
         private List<DataPoint> CreateDataPoints(
@@ -199,6 +208,7 @@ namespace Evaluation
             model.Series.Add(series1);
             return model;
         }
+
     }
 
     internal struct Contour

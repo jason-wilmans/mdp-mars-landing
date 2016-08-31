@@ -28,6 +28,9 @@
             <TabItem Header="Speed/Height">
                 <oxy:PlotView Model="{Binding SpeedHeightModel}" />
             </TabItem>
+            <TabItem Header="Density">
+                <oxy:PlotView Model="{Binding DensityModel}" />
+            </TabItem>
             <TabItem Header="Acceleration">
                 <oxy:PlotView Model="{Binding AccelerationModel}" />
             </TabItem>

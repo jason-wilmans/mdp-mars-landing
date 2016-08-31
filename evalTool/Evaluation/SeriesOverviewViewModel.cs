@@ -101,6 +101,16 @@ namespace Evaluation
             }
         }
 
+        public PlotModel DensityModel
+        {
+            get { return _densityModel; }
+            set
+            {
+                _densityModel = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public PlotModel AtmosphereModel { get; set; }
 
         private readonly SeriesParser _seriesParser;
@@ -109,10 +119,11 @@ namespace Evaluation
         private int _selectedSpeed;
         private ObservableCollection<TestSeries> _currentSeries;
         private PlotModel _trajectoryModel;
-        private DiagramService _diamgramService;
+        private readonly DiagramService _diamgramService;
         private readonly OutputService _outputService;
         private PlotModel _accelerationModel;
         private PlotModel _speedHeightModel;
+        private PlotModel _densityModel;
 
 
         public SeriesOverviewViewModel()
@@ -164,6 +175,7 @@ namespace Evaluation
         {
             TrajectoryModel = _diamgramService.PrepareTrajectoryDiagram(CurrentSeries[0]);
             SpeedHeightModel = _diamgramService.PrepareSpeedHeightDiagram(CurrentSeries[0]);
+            DensityModel = _diamgramService.PrepareDensityChart(CurrentSeries[0]);
         }
 
         protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = null)

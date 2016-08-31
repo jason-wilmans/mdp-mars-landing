@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Evaluation
 {
@@ -14,6 +15,7 @@ namespace Evaluation
 
         public DataSeries Acceleration { get; set; }
         public DataSeries AirSpeed { get; set; }
+        public DataSeries Temperature { get; set; }
         public DataSeries Position { get; set; }
         public DataSeries Speed { get; set; }
         public DataSeries MachSpeed { get; set; }
@@ -68,5 +70,17 @@ namespace Evaluation
         {
             return Position.EnumerateOdd().Last();
         }
+
+        public IEnumerable<double> EnumerateTimeValues()
+        {
+            IList<double> timeValues = new List<double>();
+            for (int i = 0; i < AirSpeed.Count; i++)
+            {
+                timeValues.Add(i * TimeResolution);
+            }
+            return timeValues;
+        }
+
+        public double LastTimeStamp => TimeResolution*(AirSpeed.Count - 1);
     }
 }
