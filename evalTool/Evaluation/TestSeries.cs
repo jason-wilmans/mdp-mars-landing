@@ -16,6 +16,11 @@ namespace Evaluation
         public DataSeries AirSpeed { get; set; }
         public DataSeries Position { get; set; }
         public DataSeries Speed { get; set; }
+        public DataSeries MachSpeed { get; set; }
+        public DataSeries Density { get; set; }
+        public DataSeries Throttle { get; set; }
+        public DataSeries Thrust { get; set; }
+        public DataSeries Fuel { get; set; }
 
         public TestSeries(double liftToDragCoefficient, double entryAngle, int entrySpeed, double timeResolution)
         {

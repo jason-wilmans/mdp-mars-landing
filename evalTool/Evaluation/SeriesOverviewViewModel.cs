@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 using OxyPlot;
 
 namespace Evaluation
 {
     class SeriesOverviewViewModel : INotifyPropertyChanged
     {
-        private static readonly string ResultFolderPath = "..\\..\\..\\..\\results\\";
-        private readonly string OutputFolder = ResultFolderPath + "evaluated\\";
+        private static string ResultFolderPath;
+        private string OutputFolder;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -104,6 +106,8 @@ namespace Evaluation
 
         public SeriesOverviewViewModel()
         {
+            DetermineFolders();
+
             _diamgramService = new DiagramService();
             _seriesParser = new SeriesParser();
             var readSeries = UpdateSeries();
@@ -120,8 +124,27 @@ namespace Evaluation
             AvailableSpeeds = new ObservableCollection<int>(readSeries.Select(s => s.EntrySpeed).Distinct().ToList());
             _outputService = new OutputService(OutputFolder, _diamgramService);
             //_outputService.WriteEvaulationData(TestSeries);
+
             AtmosphereModel = _diamgramService.PrepareAtmosphereDiagram(0.1921);
             _outputService.WritePdf(AtmosphereModel, "nasa");
+        }
+
+        private void DetermineFolders()
+        {
+            var dialog = new FolderBrowserDialog
+            {
+                SelectedPath = Application.StartupPath
+            };
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                ResultFolderPath = dialog.SelectedPath + "\\";
+                OutputFolder = ResultFolderPath + "evaluated\\";
+            }
+            else
+            {
+                App.Current.MainWindow.Close();
+            }
         }
 
         private void UpdateModel()

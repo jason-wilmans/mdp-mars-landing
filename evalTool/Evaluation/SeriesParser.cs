@@ -37,16 +37,23 @@ namespace Evaluation
             int speed = int.Parse(parts[parts.Length - 1], CultureInfo.InvariantCulture);
 
             TestSeries series = new TestSeries(ldRatio, angle, speed, 0.5);
-            series.Acceleration = ParseData(seriesPath + "\\" + "acceleration.out");
-            series.AirSpeed = ParseData(seriesPath + "\\" + "airSpeed.out");
+            series.MachSpeed = ParseData(seriesPath + "\\" + "machSpeed.out");
             series.Speed = ParseData(seriesPath + "\\" + "speed.out", true);
+            series.AirSpeed = ParseData(seriesPath + "\\" + "airSpeed.out");
             series.Position = ParseData(seriesPath + "\\" + "position.out", true);
+            series.Acceleration = ParseData(seriesPath + "\\" + "acceleration.out");
+            series.Density = ParseData(seriesPath + "\\" + "density.out");
+            series.Throttle = ParseData(seriesPath + "\\" + "throttle.out");
+            series.Thrust = ParseData(seriesPath + "\\" + "thrust.out");
+            series.Fuel = ParseData(seriesPath + "\\" + "fuel.out");
+
 
             return series;
         }
 
         private DataSeries ParseData(string dataFile, bool isVector = false)
         {
+            if (!File.Exists(dataFile)) return null;
             DataSeries data = new DataSeries(isVector);
             using (var stream = new StreamReader(dataFile))
             {
