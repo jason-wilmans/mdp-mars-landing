@@ -1,23 +1,14 @@
+
+\label{sec:experimente}In diesem Kapitel werden die Ergebnisse der Simulation ausgewertet. Um den Einfluss der verschiedenen Parameter auf die Simulationsergebnisse zu untersuchen, wurden eine Reihe von Testreihen berechnet und ausgewertet. Der erste Abschnitt \ref{subsec:reihen} erklärt den Aufbau und die Durchführung der Testreihen. Der Autor entwickelte zum Untersuchen der Ergebnisse ein kleines Analysetool, welches im Abschnitt \ref{subsec:tool} kurz vorgestellt wird. Der Abschnitt \ref{subsec:results} stellt dann die Ergebnisse detailliert vor und diskutiert diese. Zuletzt werden die Erkenntnisse zusammengefasst.
+
 \subsection{Versuchsreihen}
-Variables:
-L/D = 0.0 to 0.3 (step size: 0.05 = 5 steps)
-Entry Speed = 3000 to 9000 m/s  (Stepsize 1000 m/s = 6 steps)
-Entry Angle = -10$^{\circ}$ to 20$^{\circ}$ (step size: 1$^{\circ}$ = 5 steps) 
+\input{chapters/experimente/reihen}
 
-Results:
-Time
-Trajectory
-Max/Min Air Speed and Speed on Impact
-Total Horizontal Distance
-Max Force
+\subsection{Analysetool}
+\input{chapters/ergebnisse/tool}
 
-\begin{tabular}{|c|c|}
-	\hline 
-	&  \\ 
-	\hline 
-	&  \\ 
-	\hline 
-\end{tabular} 
+\subsection{Ergebnisse}
+\input{chapters/ergebnisse/ergebnisse}
 
-
-\subsection{Diskussion} :Die korrektere Annäherung durch eine Ellipse zöge einige Nachteile mit sich. Zum einen ist die Berechnung von Ellipsen mathematisch ungleich komplizierter. Zusätzlich ist sie wegen der Wurzeloperation (und der vorhergehenden Rechenschritte für die Halbachsen) ungleich teurer im Rechenaufwand. Dem gegenüber steht ist nur eine Annäherung aber der ohnehin feste Angriffswinkel von $16^{\circ}$ \cite{Edquist2009}, verändert die Fläche nur unwesentlich, die Berechnung aber deutlich verkompliziert.
+\subsection{Zusammenfassung}
+\input{chapters/ergebnisse/analyse}

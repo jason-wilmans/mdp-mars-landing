@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Evaluation"
         xmlns:oxy="http://oxyplot.org/wpf"
         mc:Ignorable="d"
-        Title="EvalTool" Height="350" Width="525">
+        Title="EvalTool" Height="500" Width="800">
     <Window.DataContext>
         <local:SeriesOverviewViewModel/>
     </Window.DataContext>
@@ -18,10 +18,10 @@
         <Label x:Name="label_Copy" Content="°" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label_Copy1" Content="m/s" HorizontalAlignment="Left" Margin="260,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="label1" Content="Summary" HorizontalAlignment="Left" Margin="10,68,0,0" VerticalAlignment="Top"/>
-        <DataGrid x:Name="dataGrid1" ItemsSource="{Binding CurrentSeries}" Margin="10,94,10,0" VerticalAlignment="Top" Height="64" />
+        <DataGrid x:Name="dataGrid1" ItemsSource="{Binding CurrenSeriesList}" Margin="10,94,10,0" VerticalAlignment="Top" Height="64" />
 
 
-        <TabControl x:Name="tabControl" Margin="10,163,10,10">
+        <TabControl x:Name="tabControl" Margin="10,223,10,10">
             <TabItem Header="Trajectory">
                 <oxy:PlotView Model="{Binding TrajectoryModel}" />
             </TabItem>
@@ -31,12 +31,26 @@
             <TabItem Header="Density">
                 <oxy:PlotView Model="{Binding DensityModel}" />
             </TabItem>
+            <TabItem Header="Mach">
+                <oxy:PlotView Model="{Binding MachSpeedModel}" />
+            </TabItem>
+            <TabItem Header="g-Forces">
+                <oxy:PlotView Model="{Binding GModel}" />
+            </TabItem>
             <TabItem Header="Acceleration">
                 <oxy:PlotView Model="{Binding AccelerationModel}" />
+            </TabItem>
+            <TabItem Header="MultiTrajectory">
+                <oxy:PlotView Model="{Binding MultiTrajectory}" />
             </TabItem>
             <TabItem Header="Atmosphere">
                 <oxy:PlotView Model="{Binding AtmosphereModel}" />
             </TabItem>
+            <TabItem Header="Statistics">
+                <local:StatisticsGrid></local:StatisticsGrid>
+            </TabItem>
         </TabControl>
+        <Button x:Name="button" Content="Diagrams for this" Margin="0,38,10,0" VerticalAlignment="Top" HorizontalAlignment="Right" Click="button_Click"/>
+        <Label x:Name="label2" Content="{Binding CurrentSeries.Outcome}" HorizontalAlignment="Left" Margin="10,163,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

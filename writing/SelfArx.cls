@@ -28,7 +28,6 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage{amsmath,amsfonts,amssymb}
 \RequirePackage{graphicx,xcolor}
-\RequirePackage[english]{babel}
 \RequirePackage{booktabs}
 
 %----------------------------------------------------------------------

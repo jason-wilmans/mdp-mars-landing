@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,49 +11,40 @@ namespace Evaluation
     {
         private readonly string _outputFolder;
         private readonly DiagramService _diagramService;
+        private string _aggregateFolder;
 
         public OutputService(string outputFolder, DiagramService _diagramService)
         {
             _outputFolder = outputFolder;
+            _aggregateFolder = outputFolder + "aggregate\\";
+            EnsureFolderExists(_aggregateFolder);
             this._diagramService = _diagramService;
         }
 
         public void WriteAcclerationGraphs(IList<TestSeries> testSeries)
         {
-            var path = _outputFolder;
-            if (Directory.Exists(path))
-            {
-                Directory.Delete(path, true);
-            }
-
-            Directory.CreateDirectory(path);
+            EnsureFolderExists(_outputFolder);
             
             foreach (var ld in testSeries.Select(s => s.LiftToDragCoefficient).Distinct())
             {
-                OutputAccelerationGraphFor(ld, testSeries);
+                var model = _diagramService.PrepareAccelerationGraphFor(ld, testSeries);
+                WritePdf(model, _aggregateFolder + $"acc{ld.ToString(CultureInfo.InvariantCulture)}");
             }
         }
 
-        private void OutputAccelerationGraphFor(double ld, IList<TestSeries> testSeries)
+        public void WriteTrajectoriesGraphs(IList<TestSeries> testSeries)
         {
-            var ldFolderPath = GetLdFolderPath(ld);
-            EnsureFolderExists(ldFolderPath);
-            var model = _diagramService.PrepareAccelerationGraphFor(ld, testSeries);
-            
-            WritePdf(model, ldFolderPath + "acceleration.pdf");
+            EnsureFolderExists(_outputFolder);
+
+            foreach (var ld in testSeries.Select(s => s.LiftToDragCoefficient).Distinct())
+            {
+                var model = _diagramService.PrepareTrajectoriesGraph(ld, testSeries);
+
+                WritePdf(model, _aggregateFolder + $"multiTrajec{ld.ToString(CultureInfo.InvariantCulture)}");
+            }
         }
 
-
-        private void OutputTrajectory(TestSeries series, string seriesPath)
-        {
-            var model = _diagramService.PrepareTrajectoryDiagram(series);
-
-            WritePdf(model, seriesPath + "trajectory.pdf");
-        }
-
-
-
-        private string EnsureFolderExists(TestSeries testSeries)
+        public string EnsureFolderExists(TestSeries testSeries)
         {
             string folder = GetLdFolderPath(testSeries.LiftToDragCoefficient);
             EnsureFolderExists(folder);
@@ -68,13 +60,19 @@ namespace Evaluation
 
         private void EnsureFolderExists(string path)
         {
-            if (!Directory.Exists(path))
+            var toCreate = path.Split('\\');
+            string current = $"{toCreate[0]}\\";
+            for (int i = 1; i < toCreate.Length; i++)
             {
-                Directory.CreateDirectory(path);
+                current += toCreate[i] + "\\";
+                if (!Directory.Exists(current))
+                {
+                    Directory.CreateDirectory(current);
+                }
             }
         }
 
-        private string GetLdFolderPath(double ld)
+        public string GetLdFolderPath(double ld)
         {
             return _outputFolder + ld.ToString("F2") + "\\";
         }
@@ -83,7 +81,7 @@ namespace Evaluation
         {
             using (var stream = File.Create(fileName + ".pdf"))
             {
-                var pdfExporter = new PdfExporter { Width = 700, Height = 400 };
+                var pdfExporter = new PdfExporter { Width = 700, Height = 500 };
                 pdfExporter.Export(model, stream);
             }
         }

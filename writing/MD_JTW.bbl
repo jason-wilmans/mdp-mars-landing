@@ -3,10 +3,15 @@
 \bibitem[\protect\citename{{Aerojet Rocketdyne}, }2012]{AerojetRocketdyne2012}
 {Aerojet Rocketdyne}. 2012.
 \newblock {\em {Thruster Selection}}.
+\newblock
+  http://www.rocket.com/article/aerojet-propulsion-helps-land-mars-science-laboratory
+  (letzter Zugriff: 2016-08-12).
 
 \bibitem[\protect\citename{{Aerojet Rocketdyne}, }2016]{AerojetRocketdyne}
 {Aerojet Rocketdyne}. 2016.
 \newblock {\em {Thruster Strengths}}.
+\newblock http://www.rocket.com/propulsion-systems/monopropellant-rockets
+  (letzter Zugriff: 2016-08-12).
 
 \bibitem[\protect\citename{Blanchard \& Walberg, }1980]{Blanchard1980}
 Blanchard, Robert~C, \& Walberg, Gerald~D. 1980.
@@ -24,14 +29,27 @@ Edquist, Karl~T, Dyakonov, Artem~a, Wrightz, Michael~J., \& Tangx, Chun~Y.
 \bibitem[\protect\citename{Hall, }2015]{Hall2015}
 Hall, Nancy. 2015.
 \newblock {\em {Mars Atmosphere Model (Metric Units)}}.
+\newblock https://www.grc.nasa.gov/www/k-12/airplane/atmosmrm.html (letzter
+  Zugriff: 2016-08-30).
 
 \bibitem[\protect\citename{NASA, }2016]{NASA2016}
 NASA. 2016.
 \newblock {\em {Mars Facts}}.
+\newblock http://nssdc.gsfc.nasa.gov/planetary/factsheet/marsfact.html (letzter
+  Zugriff: 2016-08-26).
 
 \bibitem[\protect\citename{NASA/JPL, }2009]{NASA/JPL2009}
 NASA/JPL. 2009.
 \newblock {\em {Mars Science Laboratory Parachute Qualification Testing}}.
+\newblock http://mars.jpl.nasa.gov/msl/news/index.cfm?fuseaction
+  =shownews{\&}newsid=90 (letzter Zugriff: 2016-08-31).
+
+\bibitem[\protect\citename{Shanahan, }2004]{Shanahan2004}
+Shanahan, D~F. 2004.
+\newblock {Human tolerance and crash survivability}.
+\newblock {\em Rto},  1--16.
+\newblock
+  http://ftp.rta.nato.int/public/PubFullText/RTO/EN/RTO-EN-HFM-113/EN-HFM-113-06.pdf.
 
 \bibitem[\protect\citename{Theisinger \& Braun, }2009]{Theisinger2009}
 Theisinger, John~E., \& Braun, Robert~D. 2009.
@@ -49,8 +67,14 @@ Way, David~W., Powell, Richard~W., Chen, Allen, Steltzner, Adam~D., Martin, A.
 Wells, Grant. 2000.
 \newblock {Mars Entry, Descent and Landing Parametric Trades}.
 
-\bibitem[\protect\citename{Wikipedia, }2016]{Wikipedia2016b}
-Wikipedia. 2016.
+\bibitem[\protect\citename{Wikipedia, }2016a]{Wikipedia2016}
+Wikipedia. 2016a.
+\newblock {\em {Bemannter Marsflug}}.
+\newblock https://de.wikipedia.org/wiki/Bemannter{\_}Marsflug (letzter Zugriff:
+  31.08.2016).
+
+\bibitem[\protect\citename{Wikipedia, }2016b]{Wikipedia2016b}
+Wikipedia. 2016b.
 \newblock {\em {Mars Science Laboratory}}.
 
 \bibitem[\protect\citename{Yamada {\em et~al.}, }2009]{Yamada2009}

@@ -20,3 +20,5 @@ C:\Users\jason\Documents\Work\Uni\mdp\evalTool\Evaluation\bin\Debug\OxyPlot.pdb
 C:\Users\jason\Documents\Work\Uni\mdp\evalTool\Evaluation\bin\Debug\OxyPlot.xml
 C:\Users\jason\Documents\Work\Uni\mdp\evalTool\Evaluation\bin\Debug\OxyPlot.Wpf.pdb
 C:\Users\jason\Documents\Work\Uni\mdp\evalTool\Evaluation\bin\Debug\OxyPlot.Wpf.xml
+C:\Users\jason\Documents\Work\Uni\mdp\evalTool\Evaluation\obj\Debug\StatisticsGrid.g.cs
+C:\Users\jason\Documents\Work\Uni\mdp\evalTool\Evaluation\obj\Debug\StatisticsGrid.baml

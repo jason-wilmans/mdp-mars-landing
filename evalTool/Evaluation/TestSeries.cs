@@ -54,16 +54,16 @@ namespace Evaluation
         /// </summary>
         public double LastHeight => Position.EnumerateEven().Last();
 
-        public string Turnout => CalculateTurnout();
+        public string Outcome => CalculateOutcome();
 
-        private string CalculateTurnout()
+        private string CalculateOutcome()
         {
             if (LastHeight <= 0.2)
             {
-                return LastSpeed <= 1.0 ? "Landing" : "Crash";
+                return LastSpeed <= 2.5 ? "Landing" : "Crash";
             }
 
-            return "Parachute";
+            return "In Air";
         }
 
         private double LastDistance()
@@ -81,6 +81,6 @@ namespace Evaluation
             return timeValues;
         }
 
-        public double LastTimeStamp => TimeResolution*(AirSpeed.Count - 1);
+        public double LastTimeStamp => 540;
     }
 }

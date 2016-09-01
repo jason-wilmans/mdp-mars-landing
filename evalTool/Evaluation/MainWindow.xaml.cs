@@ -24,5 +24,10 @@ namespace Evaluation
         {
             InitializeComponent();
         }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            (DataContext as SeriesOverviewViewModel).OutputDiagramsForCurrentSeries();
+        }
     }
 }

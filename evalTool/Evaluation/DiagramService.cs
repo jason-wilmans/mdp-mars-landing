@@ -17,8 +17,8 @@ namespace Evaluation
     {
         public PlotModel PrepareSpeedHeightDiagram(TestSeries testSeries)
         {
-            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Geschwindigkeit (km/s)", Minimum = 0, Maximum = 8.5 };
-            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Höhe (km)", Minimum = 0, Maximum = 125 };
+            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Geschwindigkeit (km/s)", Minimum = 0, Maximum = 8.0 };
+            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Höhe (km)", Minimum = 0, Maximum = 150 };
             var xAxis = testSeries.AirSpeed.EnumerateAll().Select(s => s / 1000);
             var yAxis = testSeries.Position.EnumerateEven().Select(s => s / 1000);
             var dataPoints = CreateDataPoints(xAxis, yAxis);
@@ -44,6 +44,45 @@ namespace Evaluation
             var dataPoints = CreateDataPoints(xAxis, yAxis);
             return PrepareLineChart("Atmosphärendruck", dataPoints, bottom, left, OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff));
         }
+        public PlotModel PrepareMachSpeedChart(TestSeries testSeries)
+        {
+            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Zeit (s)", Minimum = 0, Maximum = testSeries.LastTimeStamp };
+            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Geschwindigkeit (Mach)", Minimum = 0, Maximum = 275 };
+            var xAxis = testSeries.EnumerateTimeValues();
+            var yAxis = testSeries.MachSpeed.EnumerateAll();
+            var dataPoints = CreateDataPoints(xAxis, yAxis);
+            return PrepareLineChart("Atmosphärendruck", dataPoints, bottom, left, OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff));
+        }
+
+        public PlotModel PrepareGChart(TestSeries testSeries)
+        {
+            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Zeit (s)", Minimum = 0, Maximum = testSeries.LastTimeStamp };
+            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Beschleunigung (g)", Minimum = 0, Maximum = 70 };
+            var xAxis = testSeries.EnumerateTimeValues();
+            var yAxis = testSeries.Acceleration.EnumerateAll();
+            var dataPoints = CreateDataPoints(xAxis, yAxis);
+            return PrepareLineChart("Atmosphärendruck", dataPoints, bottom, left, OxyColor.FromArgb(0xff, 0x00, 0x70, 0xff));
+        }
+
+        public PlotModel PrepareTrajectoriesGraph(double ld, IList<TestSeries> testSeries)
+        {
+            var minColor = OxyColor.FromArgb(0xff, 0x00, 0xdb, 0xff);
+            var maxColor = OxyColor.FromArgb(0xff, 0xff, 0x72, 0x00);
+            
+            IList<Line> lines = new List<Line>();
+            foreach (var series in testSeries.Where(s => s.LiftToDragCoefficient == ld))
+            {
+                var xAxis = series.Position.EnumerateOdd().Select(s => s / 1000);
+                var yAxis = series.Position.EnumerateEven().Select(s => s / 1000);
+                var dataPoints = CreateDataPoints(xAxis, yAxis);
+                var color = Math.Abs(series.EntryAngle - 15.0) < 0.1 && series.EntrySpeed == 6000 ? maxColor : minColor;
+                lines.Add(new Line(dataPoints, color));
+            }
+
+            var bottom = new LinearAxis { Position = AxisPosition.Bottom, Title = "Horizontale Distanz (km)", Minimum = 0, Maximum = 1000 };
+            var left = new LinearAxis { Position = AxisPosition.Left, Title = "Höhe (km)", Minimum = 0, Maximum = 125 };
+            return PrepareMultiLineChart("Trajektorien nach L/D", bottom, left, lines);
+        }
 
         private List<DataPoint> CreateDataPoints(
             IEnumerable<double> xAxis,
@@ -68,8 +107,8 @@ namespace Evaluation
                 Title = "Maximale Beschleunigung",
                 Axes =
                 {
-                    new LinearAxis {Position = AxisPosition.Left, Title = "Speed (m/s)", Minimum = testSeries.Min(s => s.EntrySpeed), Maximum = testSeries.Max(s => s.EntrySpeed)},
-                    new LinearAxis {Position = AxisPosition.Bottom, Title = "Angle (°)", Minimum = testSeries.Min(s => -s.EntryAngle), Maximum = testSeries.Max(s => -s.EntryAngle)}
+                    new LinearAxis {Position = AxisPosition.Left, Title = "Geschwindigkeit (m/s)", Minimum = testSeries.Min(s => s.EntrySpeed), Maximum = testSeries.Max(s => s.EntrySpeed)},
+                    new LinearAxis {Position = AxisPosition.Bottom, Title = "Eintrittswinkel (°)", Minimum = testSeries.Min(s => -s.EntryAngle), Maximum = testSeries.Max(s => -s.EntryAngle)}
                 }
             };
             var angles = testSeries.Where(s => s.LiftToDragCoefficient == ld).Select(s => -s.EntryAngle).Distinct().ToArray();
@@ -183,7 +222,37 @@ namespace Evaluation
             return p / (R * (T + 273.1));
         }
 
-        public PlotModel PrepareLineChart(string title, List<DataPoint> points, Axis bottom, Axis left, OxyColor lineColor)
+        public PlotModel PrepareMultiLineChart(string title, Axis bottom, Axis left, IEnumerable<Line> lines)
+        {
+            var model = new PlotModel
+            {
+                Title = title,
+                Axes =
+                {
+                    bottom,
+                    left
+                }
+            };
+
+            foreach (var line in lines)
+            {
+                var series = new LineSeries
+                {
+                    Color = line.Color,
+                    StrokeThickness = 1.0,
+                    LineStyle = LineStyle.Solid,
+                    MarkerType = MarkerType.Circle
+                };
+
+                series.Points.AddRange(line.Points);
+
+                model.Series.Add(series);
+            }
+            
+            return model;
+        }
+
+    public PlotModel PrepareLineChart(string title, List<DataPoint> points, Axis bottom, Axis left, OxyColor lineColor)
         {
             var model = new PlotModel
             {
@@ -208,7 +277,6 @@ namespace Evaluation
             model.Series.Add(series1);
             return model;
         }
-
     }
 
     internal struct Contour
@@ -219,6 +287,18 @@ namespace Evaluation
         public Contour(double limit, OxyColor color)
         {
             Limit = limit;
+            Color = color;
+        }
+    }
+
+    internal struct Line
+    {
+        public IList<DataPoint> Points;
+        public OxyColor Color;
+
+        public Line(IList<DataPoint> points, OxyColor color)
+        {
+            Points = points;
             Color = color;
         }
     }

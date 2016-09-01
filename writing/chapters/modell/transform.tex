@@ -1,4 +1,4 @@
 \label{transform}
-Das Transform verwaltet die drei Variablen Geschwindigkeit, Position und Rotation. Das System hat als Parameter den aktuellen Beschleunigungsvektor. Die Beschleunigung entspricht der Summe der Einzelbeschleunigungen der anderen drei Blöcke. Die Geschwindigkeit ist das Integral der Beschleunigung, die Position integriert entsprechend die Geschwindigkeit.
+Das Transform verwaltet die drei Variablen Ge\-schwin\-dig\-keit, Position und Rotation. Das System hat als Parameter den aktuellen Beschleunigungsvektor. Die Beschleunigung entspricht der Summe der Einzelbeschleunigungen der anderen drei Blöcke. Die Geschwindigkeit ist das Integral der Beschleunigung, die Position integriert entsprechend die Geschwindigkeit.
 
 Die Rotation hingegen ist nicht als unabhängige dynamische Größe modelliert. Sie wird als optimal geregelt, i.e. immer der aktuellen Tangente des Flugtrajektors entgegengesetzt, angenommen. Entsprechend wird die Rotation als ein Vektor $\vec r$ dynamisch aus dem aktuellen Geschwindigkeitsvektor $\vec v$ berechnet als $\vec r = -\frac{\vec v}{|\vec v|}$.\\ \\

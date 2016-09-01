@@ -20,6 +20,10 @@
 
 \documentclass[fleqn,10pt]{SelfArx} % Document font size and equations flushed left
 
+\usepackage[german]{babel}
+\usepackage[german,refpage]{nomencl}
+%\usepackage[ngerman]{babel}
+
 \usepackage{url}
 \usepackage{lipsum} % Required to insert dummy text. To be removed otherwise
 \usepackage{custom}
@@ -55,24 +59,25 @@
 %	ARTICLE INFORMATION
 %----------------------------------------------------------------------------------------
 
-\JournalInfo{Journal, Vol. XXI, No. 1, 1-5, 2013} % Journal information
-\Archive{Additional note} % Additional notes (e.g. copyright, DOI, review/research article)
+\JournalInfo{Modellierung dynamischer Systeme (Prof. Dr. Meisel, SoSe 2016)} % Journal information
+\Archive{ Hausarbeit --- 01.09.2016 } % Additional notes (e.g. copyright, DOI, review/research article)
 
-\PaperTitle{Article Title} % Article title
+\PaperTitle{Der Einfluss von $L/D$ bei automatisierten Landungen in der Marsatmosphäre} % Article title
 
-\Authors{John Smith\textsuperscript{1}*, James Smith\textsuperscript{2}} % Authors
-\affiliation{\textsuperscript{1}\textit{Department of Biology, University of Examples, London, United Kingdom}} % Author affiliation
-\affiliation{\textsuperscript{2}\textit{Department of Chemistry, University of Examples, London, United Kingdom}} % Author affiliation
-\affiliation{*\textbf{Corresponding author}: john@smith.com} % Corresponding author
+\Authors{Jason T. Wilmans\textsuperscript{1}*} % Authors
+\affiliation{\textsuperscript{1}\textit{Department Technik und Informatik, Hochschule für Angewandte Wissenschaften Hamburg, Hamburg, Deutschland}} % Author affiliation
+\affiliation{*\textbf{Corresponding author}: jason.wilmans@haw-hamburg.de} % Corresponding author
 
-\Keywords{Keyword1 --- Keyword2 --- Keyword3} % Keywords - if you don't want any simply remove all the text between the curly brackets
+\Keywords{Mars --- dynamische Systeme --- MATLAB/Simulink} % Keywords - if you don't want any simply remove all the text between the curly brackets
 \newcommand{\keywordname}{Keywords} % Defines the keywords heading name
 
 %----------------------------------------------------------------------------------------
 %	ABSTRACT
 %----------------------------------------------------------------------------------------
 
-\Abstract{\lipsum[1]~}
+\Abstract{
+	\input{abstract}
+}
 
 %----------------------------------------------------------------------------------------
 
